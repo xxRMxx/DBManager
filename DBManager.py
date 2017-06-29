@@ -173,22 +173,22 @@ note2 = Notebook(root)
 
 # import logic
 #execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Logik/DBLogik.py') # no function anymore
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Logik/tab1Datenbank.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Logik/tab2Tabelle.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Logik/tab3MxN-Tabelle.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Logik/tab4Spalte.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Logik/tab5Fremdschluessel.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Logik/tab6Sequenz.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Logik/tab7Inhalt.py')
+execfile('./Logik/tab1Datenbank.py')
+execfile('./Logik/tab2Tabelle.py')
+execfile('./Logik/tab3MxN-Tabelle.py')
+execfile('./Logik/tab4Spalte.py')
+execfile('./Logik/tab5Fremdschluessel.py')
+execfile('./Logik/tab6Sequenz.py')
+execfile('./Logik/tab7Inhalt.py')
 
 # import views
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Views/tab1Datenbank.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Views/tab2Tabelle.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Views/tab3MxN-Tabelle.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Views/tab4Spalte.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Views/tab5Fremdschluessel.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Views/tab6Sequenz.py')
-execfile('/home/raphael/HomeServer/Programmierung/Entwicklung/Python/DBManager/Views/tab7Inhalt.py')
+execfile('./Views/tab1Datenbank.py')
+execfile('./Views/tab2Tabelle.py')
+execfile('./Views/tab3MxN-Tabelle.py')
+execfile('./Views/tab4Spalte.py')
+execfile('./Views/tab5Fremdschluessel.py')
+execfile('./Views/tab6Sequenz.py')
+execfile('./Views/tab7Inhalt.py')
 
 textFieldInfo = Text(
     root,
