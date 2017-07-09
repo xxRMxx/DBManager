@@ -136,6 +136,8 @@ def showColumns():
     if infoField != "" and tablename == "Tabellenname":
         textFieldInfo.delete(1.0, END)
         textFieldInfo.insert(END, "Enter table name first")
+    # check if something like this is possible
+    #elif infoField == "Enter table name first" or (tablename, tablename2, tablename3, tablename4, tablename5, tablename6 != "" or tablename != "Tabellenname"):
     elif infoField == "Enter table name first" or (tablename != "" or tablename != "Tabellenname"):
         textFieldInfo.delete(1.0, END)
         try:
