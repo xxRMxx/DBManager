@@ -1,24 +1,15 @@
 # logic for database options
 
-# import psycopg2
-
 global conn
 global cur
 conn = ""
 cur = ""
 
-# functions for the db
-def openDB():
-    global conn
-    global cur
-    global dbname
-    global user
-    global password
-    global host
-    dbname = tab1DBName.get()
-    user = tab1UserName.get()
-    password = tab1Password.get()
-    host = tab1Host.get()
+
+# function to open a database connection
+def openDB(database, user, password, host):
+    global conn # do I need this? Definition is above
+    global cur # do I need this? Definition is above
     conn = 0
     try:
         if conn != 0:
@@ -26,44 +17,42 @@ def openDB():
         if host == "":
             if len(password) == 0:
                 conn = psycopg2.connect(
-                    "dbname='"+dbname+
+                    "dbname='"+database+
                     "' user='"+user+"'"
                 )
                 cur = conn.cursor()
-                string = "Connection established: database "+dbname+", current user "+user
-                writeTarget(string)
+                writeTarget("Connection established: database "+database+", current user "+user)
             else:
                 conn = psycopg2.connect(
-                    "dbname='"+dbname+
+                    "dbname='"+database+
                     "' user='"+user+
                     "' password='"+password+"'"
                 )
                 cur = conn.cursor()
-                string = "Connection established: database "+dbname+", current user "+user
-                writeTarget(string)
+                writeTarget("Connection established: database "+database+", current user "+user)
         else:
             if len(password) == 0:
                 conn = psycopg2.connect(
-                    "dbname='"+dbname+
+                    "dbname='"+database+
                     "' user='"+user+
                     "' host='"+host+"'"
                 )
                 cur = conn.cursor()
-                string = "Connection established: database "+dbname+", current user "+user
-                writeTarget(string)
+                writeTarget("Connection established: database "+database+", current user "+user)
             else:
                 conn = psycopg2.connect(
-                    "dbname='"+dbname+
+                    "dbname='"+database+
                     "' user='"+user+
                     "' password='"+password+
                     "' host='"+host+"'"
                 )
                 cur = conn.cursor()
-                string = "Connection established: database "+dbname+", current user "+user
-                writeTarget(string)
+                writeTarget("Connection established: database "+database+", current user "+user)
     except:
-        rollback()
+        rollback("Connecting to database failed")
 
+
+# function for closing a database connection
 def closeDB():
     if cur == "":
         root.quit()
@@ -71,9 +60,8 @@ def closeDB():
         try:
             conn.rollback()
             conn.close()
-            string = "Connection closed"
-            writeTarget(string)
+            writeTarget("Connection closed")
             root.quit()
         except:
-            rollback()
+            rollback("Connection closed")
             sys.exit(1)
