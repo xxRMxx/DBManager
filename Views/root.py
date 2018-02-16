@@ -1,6 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+
+# buttons for showing db structure
+options = [
+    {'label': 'Datenbanken',
+     'command': showDatabases},
+    {'label': 'Benutzer',
+     'command': showUsers},
+    {'label': 'Tabellen',
+     'command': showTables},
+    {'label': 'Spalten',
+     'command': showColumns}
+]
+
+
 # build application menu
 menu = Menu(root)
 root.config(menu = menu)
@@ -20,25 +34,13 @@ filemenu.add_cascade(
     menu = submenu
 )
 
-submenu.add_command(
-    label = "Datenbanken",
-    command = showDatabases
+# loop over options and create some buttons
+for item in options:
+    submenu.add_command(
+        label = item['label'],
+        command = item['command']
 )
 
-submenu.add_command(
-    label = "Benutzer",
-    command = showUsers
-)
-
-submenu.add_command(
-    label = "Tabellen",
-    command = showTables
-)
-
-submenu.add_command(
-    label = "Spalten",
-    command = showColumns
-)
 
 filemenu.add_separator()
 filemenu.add_command(
