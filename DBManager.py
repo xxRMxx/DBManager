@@ -1,35 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# The DBManager is an API for database communication and development
-# current database: Postgres
+# The DBManager is an API for database communication
+# supported databases: Postgres
 
-# import things for database and system
+# import things for database communication and system processes
 from Tkinter import *
 from ttk import *
 from ScrolledText import *
 from subprocess import Popen, PIPE
 from shlex import split
+from datetime import datetime
 import tkMessageBox
 import psycopg2
 import subprocess
 import time
 
-from datetime import datetime
 timestamp = str(datetime.now())
 
-# check whether logfile exists
-# else create it
-#retcode = subprocess.Popen("ls /var/log/ | grep dbmanager.log")
-if subprocess.Popen("ls /var/log/ | grep dbmanager.log", shell=True) == 0:
+# check whether logfile exists; else create it
+if subprocess.Popen("ls /var/log/ | grep dbmanager.log", shell = True) == 0:
     filename = 'var/log/dbmanager.log'
 else:
-    subprocess.Popen("cd /var/log/ && touch dbmanager.log", shell=True)
+    subprocess.Popen("cd /var/log/ && touch dbmanager.log", shell = True)
     filename = "/var/log/dbmanager.log"
+
 
 # global width and height
 globalWidth = 746
 globalHeight = 269
+
 
 # build the gui
 root = Tk()
@@ -39,48 +39,53 @@ root.minsize(
     height = globalHeight
 )
 
+
 note = Notebook(root)
 
 backgroundcolour = '#A9E2F3'
-#Style().configure(root, background = backgroundcolour)
-#Style().configure(note, background = backgroundcolour)
+
 
 # width of note for responsiveness
 widgetWidth = 650
 
+
 # list of logic scripts
-logics = [
-    './Logik/root.py',
-    './Logik/tab1database.py',
-    './Logik/tab2table.py',
-    './Logik/tab3mxntable.py',
-    './Logik/tab4column.py',
-    './Logik/tab5foreignkey.py',
-    './Logik/tab6sequence.py',
-    './Logik/tab7content.py',
-    './Logik/tab8diagram.py'
+commands = [
+    './Root/commands.py',
+    './Database/commands.py',
+    './Table/commands.py',
+    './MxNTable/commands.py',
+    './Column/commands.py',
+    './Foreignkey/commands.py',
+    './Sequence/commands.py',
+    #'./Content/commands.py',    
+    #'./Diagram/commands.py'
 ]
+
 
 # list of view scripts
 views = [
-    './Views/root.py',
-    './Views/tab1database.py',
-    './Views/tab2table.py',
-    './Views/tab3mxntable.py',
-    './Views/tab4column.py',
-    './Views/tab5foreignkey.py',
-    './Views/tab6sequence.py',
-    './Views/tab7content.py',
-    './Views/tab8diagram.py'
+    './Root/view.py',
+    './Database/view.py',
+    './Table/view.py',
+    './MxNTable/view.py',
+    './Column/view.py',
+    './Foreignkey/view.py',
+    './Sequence/view.py',
+    #'./Content/view.py',
+    #'./Diagram/view.py'
 ]
 
-# import every logic script
-for script in logics:
+
+# import logic
+for script in commands:
     execfile(script)
 
-# import every view
+
+# import views
 for view in views:
     execfile(view)
 
-# build the gui
+
+# run gui
 root.mainloop()

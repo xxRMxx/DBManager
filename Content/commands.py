@@ -1,4 +1,5 @@
-# logic for content mangement
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 
 # function for inserting content in table

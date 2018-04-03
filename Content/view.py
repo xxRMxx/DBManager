@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Inhaltsoption
 
 tab7 = Frame(note)
 

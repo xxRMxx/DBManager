@@ -1,58 +1,34 @@
-# logic for mxn-tables
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 
-# function for adding a mxntable in current database
+# add mxntable
 def addMxNTable(mxntable):
     table1 = mxntable.split('x')[0]
     table2 = mxntable.split('x')[1]
     try:
-        begin("Create mxntable %s" % mxntable)
-        cur.execute(
-            "create table "+table1+"("+
-            table1+"_id serial primary key, "+
-            table1+"_modtime timestamp with time zone, "+
-            table1+"_author varchar(80))"
-        )
-        cur.execute(
-            "create table "+table2+"("+
-            table2+"_id serial primary key, "+
-            table2+"_modtime timestamp with time zone, "+
-            table2+"_author varchar(80))"
-        )
-        cur.execute(
-            "create table "+mxntable+"("+
-            mxntable+"_id serial primary key, "+
-            mxntable+"_modtime timestamp with time zone, "+
-            mxntable+"_author varchar(80), "+
-            mxntable+"_"+table1+"_id bigint references "+
-            table1+"("+table1+"_id), "+
-            mxntable+"_"+table2+"_id bigint references "+
-            table2+"("+table2+"_id))"
-        )
+        begin("Create mxntable %s" % (mxntable))
+        cur.execute("create table %s (%s_id serial primary key, %s_modtime timestamp with time zone, %s_author varchar(80))" % (table1, table1, table1, table1))
+        cur.execute("create table %s (%s_id serial primary key, %s_modtime timestamp with time zone, %s_author varchar(80))" % (table2, table2, table2, table2))
+        cur.execute("create table %s (%s_id serial primary key, %s_modtime timestamp with time zone, %s_author varchar(80), %s_%s_id bigint references %s (%s_id), %s_%s_id bigint references %s (%s_id))" % (mxntable, mxntable, mxntable, mxntable, mxntable, table1, table1, table1, mxntable, table2, table2, table2))
         commit("Add table %s, table %s and mxntable %s successful" % (table1, table2, mxntable))
     except:
-        rollback("Add table %s, table %s and mxntable %s failed" % table1, table2, mxntable)
+        rollback("Add table %s, table %s and mxntable %s failed" % (table1, table2, mxntable))
 
 
-# function for dropping mxntable in current database
+# drop mxntable
 def dropMxNTable(mxntable):
     table1 = mxntable.split('x')[0]
     table2 = mxntable.split('x')[1]
     val = tkMessageBox.askyesno(
         "MxN-Tabelle",
         "MxN-Tabelle wirklich loeschen?")
-    if val == True:
+    if val:
         try:
             cur.execute("begin")
-            cur.execute(
-                        "drop table "+mxntable
-                        )
-            cur.execute(
-                        "drop table "+table1
-                        )
-            cur.execute(
-                        "drop table "+table2
-                        )
+            cur.execute("drop table %s" % (mxntable))
+            cur.execute("drop table %s" % (table1))
+            cur.execute("drop table %s" % (table2))
             commit("Drop table %s, table %s and mxntable %s successful" % (table1, table2, mxntable))
         except:
             rollback("Drop table %s, table %s and mxntable %s failed" % (table1, tabl2, mxntable))

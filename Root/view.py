@@ -4,14 +4,22 @@
 
 # buttons for showing db structure
 menuoptions = [
-    {'label': 'Datenbanken',
-     'command': showDatabases},
-    {'label': 'Benutzer',
-     'command': showUsers},
-    {'label': 'Tabellen',
-     'command': showTables},
-    {'label': 'Spalten',
-     'command': showColumns}
+    {
+        'label': 'Datenbanken',
+        'command': showDatabases
+    },
+    {
+        'label': 'Benutzer',
+        'command': showUsers
+    },
+    {
+        'label': 'Tabellen',
+        'command': showTables
+    },
+    {
+        'label': 'Spalten',
+        'command': showColumns
+    }
 ]
 
 
@@ -46,19 +54,22 @@ filemenu.add_separator()
 filemenu.add_command(
     label = "Zurücksetzen",
     command = reset
-    )
-filemenu.add_separator()
+)
 
+
+filemenu.add_separator()
 filemenu.add_command(
     label = "Hilfe",
     command = help
-    )
-filemenu.add_separator()
+)
 
+
+filemenu.add_separator()
 filemenu.add_command(
     label = "Schließen",
     command = closeDB
-    )
+)
+
 
 # info field
 textFieldInfo = Text(

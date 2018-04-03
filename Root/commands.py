@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# logic for getting databases, users, tables, columns and other additional information
 
-# function for logging
+# function for log in
 def writeTarget(string):
     target = open(filename, 'a')
-    target.write(timestamp+": "+string+"\n")
+    target.write(timestamp + ": %s\n" % (string))
     target.close()
+
 
 def begin(string):
     cur.execute("begin")
     writeTarget(string)
+
 
 def commit(string):
     cur.execute("commit")
@@ -19,11 +20,13 @@ def commit(string):
     textFieldInfo.insert(1.0, string)
     writeTarget(string)
 
+
 def rollback(string):
     cur.execute("rollback")
     textFieldInfo.delete(1.0, END)
     textFieldInfo.insert(1.0, string)
     writeTarget(string)
+
 
 def reset():
     # list for all entry fields in application
@@ -45,34 +48,34 @@ def reset():
             en.insert(0, "")
     writeTarget("Reset user entries successful")
 
+
 def help():
     # a pop up should be shown
-    print "Rettung naht"
+    print "Hold on. Rescue will be implemented soon."
 
 
-# function to show databases on system
+# show databases
 def showDatabases():
     try:
         begin("Show available databases")
-        getDatabases = cur.execute(
-            "select datname from pg_database where datistemplate is False")
+        getDatabases = cur.execute("select datname from pg_database where datistemplate is False")
         databases = cur.fetchall()
         commit("success: get available databases")
         infoField = textFieldInfo.get(1.0, 'end-1c')
         if infoField == "":
             for x in databases:
-                x = x[0]+str("\n")
+                x = x[0] + "\n"
                 textFieldInfo.insert(END, x)
         else:
             textFieldInfo.delete(1.0, END)
             for x in databases:
-                x = x[0]+str("\n")
+                x = x[0] + "\n"
                 textFieldInfo.insert(END, x)
     except:
         rollback("error: getting databases")
 
 
-# function to show database users
+# show database users
 def showUsers():
     try:
         begin("Show available users")
@@ -82,43 +85,41 @@ def showUsers():
         infoField = textFieldInfo.get(1.0, 'end-1c')
         if infoField == "":
             for x in users:
-                x = x[0]+str("\n")
+                x = x[0] + "\n"
                 textFieldInfo.insert(END, x)
         else:
             textFieldInfo.delete(1.0, END)
             for x in users:
-                x = x[0]+str("\n")
+                x = x[0] + "\n"
                 textFieldInfo.insert(END, x)
     except:
         rollback("error: getting users")
 
 
-# function to show tables in current database
+# show tables in current database
 def showTables():
     databasename = databaseEntryFields[0].get()
     user = databaseEntryFields[1].get()
     infoField = textFieldInfo.get(1.0, 'end-1c')
     try:
         begin("Show available tables")
-        getTablenames = cur.execute(
-            "select tablename from pg_tables where pg_tables.tableowner like '%"
-            +user+"'")
+        getTablenames = cur.execute("select tablename from pg_tables where pg_tables.tableowner like '%s'" % (user))
         tables = cur.fetchall()
         commit("success: get available tables")
         if infoField == "":
             for x in tables:
-                x = x[0]+str("\n")
+                x = x[0] + "\n"
                 textFieldInfo.insert(END, x)
         else:
             textFieldInfo.delete(1.0, END)
             for x in tables:
-                x = x[0] + str("\n")
+                x = x[0] + "\n"
                 textFieldInfo.insert(END, x)
     except:
         rollback("error: getting tables")
 
 
-# function to show columns for given tablename
+# show columns for given tablename
 def showColumns():
     infoField = textFieldInfo.get(1.0, 'end-1c')
     tableList = [
@@ -137,13 +138,11 @@ def showColumns():
             textFieldInfo.delete(1.0, END)
             try:
                 begin("Show columns of table %s" % item['table'])
-                getTablenames = cur.execute(
-                                            "select (column_name || ' | ' || data_type) as information from information_schema.columns where table_name like '"
-                                            +item['table']+"'")
+                getTablenames = cur.execute("select (column_name || ' | ' || data_type) as information from information_schema.columns where table_name like '%s'" % (item['table']))
                 columns = cur.fetchall()
                 commit("success: getting columns of table %s" % item['table'])
                 for x in columns:
-                    x = x[0]+str("\n")
+                    x = x[0] + "\n"
                     textFieldInfo.insert(END, x)
             except:
                 rollback("error: getting columns of table %s" % item['table'])

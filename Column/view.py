@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Spaltenoption
 
 tab4 = Frame(note)
 
@@ -10,44 +9,58 @@ note.add(
     text = "Spalte"
 )
 
-# list for labels
+
+# lable list for columns with y-coordinate
 columnDict = [
-    {'name': 'Tabellenname',
-     'y': 0},
-    {'name': 'Spaltenname',
-     'y': 20},
-    {'name': 'Spaltentyp',
-     'y': 40}
+    {
+        'name': 'Tabellenname',
+        'y': 0
+    },
+    {
+        'name': 'Spaltenname',
+        'y': 20
+    },
+    {
+        'name': 'Spaltentyp',
+        'y': 40
+    }
 ]
+
 
 # list for column entries
 columnEntryFields = []
 
-buttons = [
-    {'name': 'Spalte anlegen',
-     'command': lambda: addColumn(
-                                    table = columnEntryFields[0].get(),
-                                    column = columnEntryFields[1].get(),
-                                    columntype = columnEntryFields[2].get()
-                                    ),
-     'x': 80,
-     'y': 175,
-     'width': 200,
-     'height': 25
-     },
-    {'name': 'Spalte löschen',
-     'command': lambda: dropColumn(
-                                    table = columnEntryFields[0].get(),
-                                    column = columnEntryFields[1].get()
-                                    ),
-     'x': 280,
-     'y': 175,
-     'width': 200,
-     'height': 25
-     }
-     ]
 
-# loop over every label in tableLabels
+# buttons for column tab
+buttons = [
+    {
+        'name': 'Spalte anlegen',
+        'command': lambda: addColumn(
+            table = columnEntryFields[0].get(),
+            column = columnEntryFields[1].get(),
+            columntype = columnEntryFields[2].get()
+        ),
+        'x': 80,
+        'y': 175,
+        'width': 200,
+        'height': 25
+    },
+    {
+        'name': 'Spalte löschen',
+        'command': lambda: dropColumn(
+            table = columnEntryFields[0].get(),
+            column = columnEntryFields[1].get()
+        ),
+        'x': 280,
+        'y': 175,
+        'width': 200,
+        'height': 25
+    }
+]
+
+
+
+# generate label for every entry in columnDict
 for item in columnDict:
     Label(
         tab4,
@@ -61,12 +74,13 @@ for item in columnDict:
     en = Entry(tab4)
     en.insert(0, "")
     en.place(
-            x = 205,
-            y = item['y'],
-            width = 200,
-            height = 25
-            )
+        x = 205,
+        y = item['y'],
+        width = 200,
+        height = 25
+    )
     columnEntryFields.append(en)
+
 
 # loop over every button in buttons
 for button in buttons:
@@ -80,5 +94,6 @@ for button in buttons:
         width = button['width'],
         height = button['height']
     )
+
 
 note.grid()
