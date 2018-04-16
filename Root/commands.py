@@ -42,10 +42,12 @@ def reset():
     entryFields.append(diagramEntryFields)
     # for every entry field in every view
     # delete user entry and insert an empty string
+
     for entries in entryFields:
         for en in entries:
             en.delete(0, END)
             en.insert(0, "")
+
     writeTarget("Reset user entries successful")
 
 
@@ -62,14 +64,15 @@ def showDatabases():
         databases = cur.fetchall()
         commit("success: get available databases")
         infoField = textFieldInfo.get(1.0, 'end-1c')
+
         if infoField == "":
             for x in databases:
-                x = x[0] + "\n"
+                x ="%s\n" % (x[0])
                 textFieldInfo.insert(END, x)
         else:
             textFieldInfo.delete(1.0, END)
             for x in databases:
-                x = x[0] + "\n"
+                x = "%s\n" % (x[0])
                 textFieldInfo.insert(END, x)
     except:
         rollback("error: getting databases")
@@ -83,14 +86,15 @@ def showUsers():
         users = cur.fetchall()
         commit("success: get available users")
         infoField = textFieldInfo.get(1.0, 'end-1c')
+
         if infoField == "":
             for x in users:
-                x = x[0] + "\n"
+                x = "%s\n" % (x[0])
                 textFieldInfo.insert(END, x)
         else:
             textFieldInfo.delete(1.0, END)
             for x in users:
-                x = x[0] + "\n"
+                x = "%s\n" % (x[0])
                 textFieldInfo.insert(END, x)
     except:
         rollback("error: getting users")
@@ -101,19 +105,21 @@ def showTables():
     databasename = databaseEntryFields[0].get()
     user = databaseEntryFields[1].get()
     infoField = textFieldInfo.get(1.0, 'end-1c')
+
     try:
         begin("Show available tables")
         getTablenames = cur.execute("select tablename from pg_tables where pg_tables.tableowner like '%s'" % (user))
         tables = cur.fetchall()
         commit("success: get available tables")
+
         if infoField == "":
             for x in tables:
-                x = x[0] + "\n"
+                x = "%s\n" % (x[0])
                 textFieldInfo.insert(END, x)
         else:
             textFieldInfo.delete(1.0, END)
             for x in tables:
-                x = x[0] + "\n"
+                x = "%s\n" % (x[0])
                 textFieldInfo.insert(END, x)
     except:
         rollback("error: getting tables")
@@ -130,6 +136,7 @@ def showColumns():
         {'table': contentEntryFields[0]},
         {'table': diagramEntryFields[2]}
     ]
+    
     for item in tableList:
         if item['table'] == "":
             textFieldInfo.delete(1.0, END)
@@ -137,14 +144,16 @@ def showColumns():
         elif item['table'] != "":
             textFieldInfo.delete(1.0, END)
             try:
-                begin("Show columns of table %s" % item['table'])
-                getTablenames = cur.execute("select (column_name || ' | ' || data_type) as information from information_schema.columns where table_name like '%s'" % (item['table']))
+                table = item['table']
+                begin("Show columns of table %s" % (table))
+                getTablenames = cur.execute("select (column_name || ' | ' || data_type) as information from information_schema.columns where table_name like '%s'" % (table))
                 columns = cur.fetchall()
-                commit("success: getting columns of table %s" % item['table'])
+                commit("success: getting columns of table %s" % (table))
+
                 for x in columns:
-                    x = x[0] + "\n"
+                    x = "%s\n" (x[0])
                     textFieldInfo.insert(END, x)
             except:
-                rollback("error: getting columns of table %s" % item['table'])
+                rollback("error: getting columns of table %s" % (table))
         else:
             rollback("error: infoField empty or missing table")

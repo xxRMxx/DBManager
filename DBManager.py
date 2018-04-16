@@ -29,6 +29,7 @@ else:
 # global width and height
 globalWidth = 746
 globalHeight = 269
+backgroundcolour = '#A9E2F3'
 
 
 # build the gui
@@ -41,8 +42,6 @@ root.minsize(
 
 
 note = Notebook(root)
-
-backgroundcolour = '#A9E2F3'
 
 
 # width of note for responsiveness

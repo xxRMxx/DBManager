@@ -43,7 +43,7 @@ buttons = [
             column = foreignkeyEntryFields[1].get(),
             reftable = foreignkeyEntryFields[2].get(),
             fkoption = v.get()
-    ),
+        ),
         'x': 80,
         'y': 175,
         'width': 200,
@@ -62,7 +62,6 @@ buttons = [
         'height': 25
     }
 ]
-
 
 
 # generate label specified in foreignkeysDict
