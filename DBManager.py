@@ -27,8 +27,8 @@ else:
 
 
 # global width and height
-globalWidth = 746
-globalHeight = 269
+globalWidth = 762 # fixed length
+globalHeight = 275 # fixed length
 backgroundcolour = '#A9E2F3'
 
 
@@ -39,7 +39,10 @@ root.minsize(
     width = globalWidth,
     height = globalHeight
 )
-
+root.resizable(
+    width = False,
+    height = False
+)
 
 note = Notebook(root)
 
@@ -57,8 +60,8 @@ commands = [
     './Column/commands.py',
     './Foreignkey/commands.py',
     './Sequence/commands.py',
-    #'./Content/commands.py',    
-    #'./Diagram/commands.py'
+    './Content/commands.py',    
+    './Diagram/commands.py'
 ]
 
 
@@ -71,8 +74,8 @@ views = [
     './Column/view.py',
     './Foreignkey/view.py',
     './Sequence/view.py',
-    #'./Content/view.py',
-    #'./Diagram/view.py'
+    './Content/view.py',
+    './Diagram/view.py'
 ]
 
 
