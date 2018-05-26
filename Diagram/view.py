@@ -7,24 +7,30 @@ tab8 = Frame(note)
 
 note.add(
     tab8,
-    text="Diagram"
+    text = "Diagram"
 )
 
 # list for labels
 diagramDict = [
-    {'name': 'Datenbankname',
-     'y': 0},
-    {'name': 'Benutzer',
-     'y': 20},
-    {'name': 'Tabellenname',
-     'y': 40}
+    {
+        'name': 'Database',
+        'y': 0
+    },
+    {
+        'name': 'User',
+        'y': 20
+    },
+    {
+        'name': 'Table',
+        'y': 40
+    }
 ]
 
 # list for diagram entry fields
 diagramEntryFields = []
 
 buttons = [
-    {'name': 'Diagram erzeugen',
+    {'name': 'Create diagram',
      'command': lambda: createDia(
         database = diagramEntryFields[0].get(),
         user = diagramEntryFields[1].get(),

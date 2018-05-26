@@ -5,19 +5,19 @@
 # buttons for showing db structure
 menuoptions = [
     {
-        'label': 'Datenbanken',
+        'label': 'Databases',
         'command': showDatabases
     },
     {
-        'label': 'Benutzer',
+        'label': 'Users',
         'command': showUsers
     },
     {
-        'label': 'Tabellen',
+        'label': 'Tables',
         'command': showTables
     },
     {
-        'label': 'Spalten',
+        'label': 'Columns',
         'command': showColumns
     }
 ]
@@ -31,14 +31,14 @@ root.config(menu = menu)
 filemenu = Menu(menu)
 
 menu.add_cascade(
-    label = "Optionen",
+    label = "Options",
     menu = filemenu
     )
 
 submenu = Menu(menu)
 
 filemenu.add_cascade(
-    label = "Anzeigen",
+    label = "Show",
     menu = submenu
 )
 
@@ -52,21 +52,21 @@ for item in menuoptions:
 
 filemenu.add_separator()
 filemenu.add_command(
-    label = "Zurücksetzen",
+    label = "Reset",
     command = reset
 )
 
 
 filemenu.add_separator()
 filemenu.add_command(
-    label = "Hilfe",
+    label = "Help",
     command = help
 )
 
 
 filemenu.add_separator()
 filemenu.add_command(
-    label = "Schließen",
+    label = "Exit",
     command = closeDB
 )
 
@@ -77,7 +77,7 @@ textFieldInfo = Text(
 )
 textFieldInfo.insert(END, "")
 textFieldInfo.place(
-    x = 545,
+    x = 561,
     y = 0,
     width = 200,
     height = 274

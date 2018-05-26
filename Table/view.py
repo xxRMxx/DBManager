@@ -6,14 +6,14 @@ tab2 = Frame(note)
 
 note.add(
     tab2,
-    text = "Tabelle"
+    text = "Table"
 )
 
 
 # list for labels
 tableDict = [
     {
-        'name': 'Tabellenname',
+        'name': 'Name',
         'y': 0
     }
 ]
@@ -47,7 +47,7 @@ for item in tableDict:
 
 buttons = [
     {
-        'name': 'Tabelle anlegen',
+        'name': 'Add table',
         'command': lambda: addTable(
             table = tableEntryFields[0].get()
         ),
@@ -57,7 +57,7 @@ buttons = [
         'height': 25
     },
     {
-        'name': 'Tabelle löschen',
+        'name': 'Delete table',
         'command': lambda: dropTable(
             table = tableEntryFields[0].get()
         ),

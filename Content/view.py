@@ -6,29 +6,29 @@ tab7 = Frame(note)
 
 note.add(
     tab7,
-    text="Inhalt"
+    text = "Content"
 )
 
 
 # list for labels
 contentDict = [
     {
-        'name': 'Tabellenname',
+        'name': 'Table',
         'y': 0
     },
     {
-        'name': 'Spaltenname',
+        'name': 'Column',
         'y': 20},
     {
-        'name': 'Inhalt',
+        'name': 'Content',
         'y': 40
     },
     {
-        'name': 'WHERE-Spaltenname',
+        'name': 'Column (where clause)',
         'y': 60
     },
     {
-        'name': 'WHERE-Inhalt',
+        'name': 'Content (where clause)',
         'y': 80
     }
 ]
@@ -38,7 +38,7 @@ contentEntryFields = []
 
 buttons = [
     {
-        'name': 'Insertieren',
+        'name': 'Insert',
         'command': lambda: insert(
             table = contentEntryFields[0].get(),
             column = contentEntryFields[1].get(),
@@ -52,7 +52,7 @@ buttons = [
         'height': 25
     },
     {
-        'name': 'Ersetzen',
+        'name': 'Update',
         'command': lambda: update(
             table = contentEntryFields[0].get(),
             column = contentEntryFields[1].get(),
@@ -66,7 +66,7 @@ buttons = [
         'height': 25
     },
     {
-        'name': 'Löschen',
+        'name': 'Delete',
         'command': lambda: delete(
             table = contentEntryFields[0].get(),
             column = contentEntryFields[1].get(),

@@ -6,21 +6,21 @@ tab1 = Frame(note)
 
 note.add(
     tab1,
-    text = "Datenbank"
+    text = "Database"
 )
 
 # list of dicts for labels and entries
 databaseDict = [
     {
-        'name': 'Datenbankname',
+        'name': 'Database',
         'y': 0
     },
     {
-        'name': 'Benutzer',
+        'name': 'User',
         'y': 20
     },
     {
-        'name': 'Passwort',
+        'name': 'Password',
         'y': 40,
         'pw': True
     },
@@ -71,7 +71,7 @@ for item in databaseDict:
 
 Label(
     tab1,
-    text = "Verbindung"
+    text = "Connection"
 ).place(
     x = 0,
     y = 100,
@@ -81,6 +81,7 @@ Label(
 
 
 connection = StringVar()
+connection.set('not established')
 entryConnection = Entry(
     tab1,
     textvariable = connection,
@@ -92,13 +93,13 @@ entryConnection.place(
     width = 200,
     height = 25
 )
-connection.trace("w", connection)
+connection.trace("w", set_connstate)
 
 
 # generate a button for log in into database
 Button(
     tab1,
-    text = "Anmelden",
+    text = "Connect",
     command = lambda: openDB(
         database = databaseEntryFields[0].get(),
         user = databaseEntryFields[1].get(),

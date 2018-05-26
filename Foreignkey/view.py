@@ -6,25 +6,25 @@ tab5 = Frame(note)
 
 note.add(
     tab5,
-    text = "Fremdschlüssel"
+    text = "Foreign key"
 )
 
 # lables for foreign key tab
 foreignkeysDict = [
     {
-        'name': 'Tabellenname',
+        'name': 'Table',
         'y': 0
     },
     {
-        'name': 'Spaltenname',
+        'name': 'Column',
         'y': 20
     },
     {
-        'name': 'Referenzierte Tabelle',
+        'name': 'Referenced table',
         'y': 40
     },
     {
-        'name': 'Referenzielle Integrität',
+        'name': 'Constraint',
         'y': 60
     }
 ]
@@ -37,7 +37,7 @@ foreignkeyEntryFields = []
 # buttons for foreign key tab
 buttons = [
     {
-        'name': 'Fremdschlüssel hinzufügen',
+        'name': 'Add foreign key constraint',
         'command': lambda: addForeignKey(
             table = foreignkeyEntryFields[0].get(),
             column = foreignkeyEntryFields[1].get(),
@@ -50,7 +50,7 @@ buttons = [
         'height': 25
     },
     {
-        'name': 'Fremdschlüssel löschen',
+        'name': 'Delete foreign key contraint',
         'command': lambda: dropForeignKey(
             table = foreignkeyEntryFields[0].get(),
             column = foreignkeyEntryFields[1].get(),
@@ -94,19 +94,19 @@ v.set("1")  # default for radio button
 
 radiobuttons = [
     {
-        'text': "Löschbeschränkung",
+        'text': "Delete restrict",
         'value': 1,
         'x': 200,
         'y': 100
     },
     {
-        'text': "Löschweitergabe",
+        'text': "Delete cascade",
         'value': 2,
         'x': 200,
         'y': 120
     },
     {
-        'text': "NULL bei Löschung",
+        'text': "NULL on delete",
         'value': 3,
         'x': 200,
         'y': 140

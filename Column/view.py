@@ -6,22 +6,22 @@ tab4 = Frame(note)
 
 note.add(
     tab4,
-    text = "Spalte"
+    text = "Column"
 )
 
 
 # lable list for columns with y-coordinate
 columnDict = [
     {
-        'name': 'Tabellenname',
+        'name': 'Table',
         'y': 0
     },
     {
-        'name': 'Spaltenname',
+        'name': 'Name',
         'y': 20
     },
     {
-        'name': 'Spaltentyp',
+        'name': 'Type',
         'y': 40
     }
 ]
@@ -34,7 +34,7 @@ columnEntryFields = []
 # buttons for column tab
 buttons = [
     {
-        'name': 'Spalte anlegen',
+        'name': 'Add column',
         'command': lambda: addColumn(
             table = columnEntryFields[0].get(),
             column = columnEntryFields[1].get(),
@@ -46,7 +46,7 @@ buttons = [
         'height': 25
     },
     {
-        'name': 'Spalte löschen',
+        'name': 'Delete column',
         'command': lambda: dropColumn(
             table = columnEntryFields[0].get(),
             column = columnEntryFields[1].get()

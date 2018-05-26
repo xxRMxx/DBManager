@@ -6,14 +6,14 @@ tab6 = Frame(note)
 
 note.add(
     tab6,
-    text = "Sequenz"
+    text = "Sequence"
 )
 
 
 # list for labels
 sequenceDict = [
     {
-        'name': 'Tabellenname',
+        'name': 'Table',
         'y': 0
     }
 ]
@@ -26,7 +26,7 @@ sequenceEntryFields = []
 # list for buttons
 buttons = [
     {
-        'name': 'Sequenz zurücksetzen',
+        'name': 'Reset sequence',
         'command': lambda: setSequence(
             table = sequenceEntryFields[0].get()
         ),

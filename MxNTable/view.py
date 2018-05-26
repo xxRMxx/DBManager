@@ -6,13 +6,13 @@ tab3 = Frame(note)
 
 note.add(
     tab3,
-    text = "MxN-Tabelle"
+    text = "MxN-table"
 )
 
 # list for labels
 mxntableDict = [
     {
-        'name': 'MxN-Tabellenname',
+        'name': 'Name',
         'y': 0
     }
 ]
@@ -25,7 +25,7 @@ mxntableEntryFields = []
 # list for buttons
 buttons = [
     {
-        'name': 'MxN-Tabelle anlegen',
+        'name': 'Add MxN-table',
         'command': lambda: addMxNTable(
             mxntable = mxntableEntryFields[0].get()
         ),
@@ -35,7 +35,7 @@ buttons = [
         'height': 25
     },
     {
-        'name': 'MxN-Tabelle löschen',
+        'name': 'Delete MxN-table',
         'command': lambda: dropMxNTable(
             mxntable = mxntableEntryFields[0].get()
         ),
