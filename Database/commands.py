@@ -54,7 +54,7 @@ def set_connstate(*args):
 
     state = 'established'
     update_in_progress = True
-    entryConnection.set(state)
+    #entryConnection.set(state)
     update_in_progress = False
         
 

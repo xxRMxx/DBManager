@@ -22,10 +22,13 @@ def commit(string):
 
 
 def rollback(string):
-    cur.execute("rollback")
-    textFieldInfo.delete(1.0, END)
-    textFieldInfo.insert(1.0, string)
-    writeTarget(string)
+    try:
+        cur.execute("rollback")
+        textFieldInfo.delete(1.0, END)
+        textFieldInfo.insert(1.0, string)
+        writeTarget(string)
+    except AttributeError:
+        writeTarget("No connection string defined. Rollback.")
 
 
 def reset():

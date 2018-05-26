@@ -19,12 +19,13 @@ import time
 timestamp = str(datetime.now())
 
 # check whether logfile exists; else create it
-if subprocess.Popen("ls /var/log/ | grep dbmanager.log", shell = True) == 0:
-    filename = 'var/log/dbmanager.log'
-else:
+try:
+    subprocess.Popen("ls /var/log/dbmanager.log | grep dbmanager.log", shell = True)
+except:
     subprocess.Popen("cd /var/log/ && touch dbmanager.log", shell = True)
-    filename = "/var/log/dbmanager.log"
 
+filename = '/var/log/dbmanager.log'
+    
 
 # global width and height
 globalWidth = 762 # fixed length
