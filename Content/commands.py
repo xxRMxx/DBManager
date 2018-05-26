@@ -82,7 +82,7 @@ def delete(table, column, content, column2, content2):
         column = ''.join(columnlist2)
         contentlist2 = []
 
-        for item in contentlist:)
+        for item in contentlist:
             contentlist2.append(item)
 
         content = ''.join(contentlist2)
