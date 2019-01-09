@@ -25,7 +25,7 @@ except:
     subprocess.Popen("cd /var/log/ && touch dbmanager.log", shell = True)
 
 filename = '/var/log/dbmanager.log'
-    
+
 
 # global width and height
 globalWidth = 762 # fixed length
@@ -61,7 +61,7 @@ commands = [
     './Column/commands.py',
     './Foreignkey/commands.py',
     './Sequence/commands.py',
-    './Content/commands.py',    
+    './Content/commands.py',
     './Diagram/commands.py'
 ]
 

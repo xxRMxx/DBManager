@@ -1,0 +1,4 @@
+Expand the git repo with further documentation.
+
+Expand documentation to comprehend the changes in this repositoy
+and to have a history of these changes.
