@@ -15,8 +15,8 @@ def addTable(table):
 # drop table
 def dropTable(table):
     val = tkMessageBox.askyesno(
-        "Tabelle",
-        "Tabelle wirklich loeschen?"
+        "Confirmation",
+        "Do you really want to drop table %s?" % (table)
     )
 
     if val:

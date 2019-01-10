@@ -21,8 +21,8 @@ def dropMxNTable(mxntable):
     table1 = mxntable.split('x')[0]
     table2 = mxntable.split('x')[1]
     val = tkMessageBox.askyesno(
-        "MxN-Tabelle",
-        "MxN-Tabelle wirklich loeschen?")
+        "Confirmation",
+        "Do you really want to drop mxn table %s?" % (mxntable))
     if val:
         try:
             cur.execute("begin")

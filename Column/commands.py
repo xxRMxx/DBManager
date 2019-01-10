@@ -15,8 +15,8 @@ def addColumn(table, column, columntype):
 # drop column from table
 def dropColumn(table, column):
     val = tkMessageBox.askyesno(
-        "Spalte",
-        "Spalte wirklich loeschen?")
+        "Confirmation",
+        "Do you really want to drop column '%s'?" % (column))
     if val:
         try:
             begin("Drop column %s from table %s" % (column, table))

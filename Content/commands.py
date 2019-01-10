@@ -7,7 +7,7 @@ def insert(table, column, content, column2, content2):
     columnlist = column.split(", ")
     contentlist = content.split(", ")
     columnlist2 = []
-    
+
     for item in columnlist:
         item = ", " + item
         columnlist2.append(item)
@@ -66,13 +66,13 @@ def delete(table, column, content, column2, content2):
     columnlist2 = []
 
     val = tkMessageBox.askyesno(
-        "Inhalt",
-        "Inhalt wirklich loeschen?"
-    )    
+        "Confirmation",
+        "Do you really want to delete the content?"
+    )
     if val == True:
         tkMessageBox.showinfo(
-            "HINWEIS",
-            "Nicht vergessen die Sequenz zurueckzusetzen"
+            "NOTE",
+            "Remember to restart the sequence."
         )
         if len(columnlist) == 1:
             for item in columnlist:
@@ -86,7 +86,7 @@ def delete(table, column, content, column2, content2):
             contentlist2.append(item)
 
         content = ''.join(contentlist2)
-        
+
         if len(column) == 0:
             try:
                 begin("Delete content from table %s" % (table))

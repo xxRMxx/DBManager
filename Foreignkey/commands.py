@@ -30,10 +30,10 @@ def addForeignKey(table, column, reftable, fkoption):
 # drop foreign key
 def dropForeignKey(table, column, reftable):
     val = tkMessageBox.askyesno(
-        "Fremdschluessel",
-        "Fremdschluessel wirklich loeschen?"
+        "Confirmation",
+        "Do you really want to drop foreign key %s_%s_id?" % (table, reftable)
     )
-    
+
     if val:
         try:
             begin("Drop foreign key for table %s on column %s" % (table, column))
