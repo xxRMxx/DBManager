@@ -9,108 +9,119 @@ note.add(
     text = "Database"
 )
 
-# list of dicts for labels and entries
-databaseDict = [
-    {
-        'name': 'Database',
-        'y': 0
-    },
-    {
-        'name': 'User',
-        'y': 20
-    },
-    {
-        'name': 'Password',
-        'y': 40,
-        'pw': True
-    },
-    {
-        'name': 'Host',
-        'y': 60
-    }
-]
 
-
-databaseEntryFields = []
-
-# loop over databaseDict
-# for every label generate a label
-# for every entry generate an entry field
-# if dict has a key for password, show '*' instead of number/character
-for item in databaseDict:
-    Label(
-        tab1,
-        text = item['name']
-    ).place(
-        x = 0,
-        y = item['y'],
-        width = 200,
-        height = 25
-    )
-    if 'pw' in item:
-        en = Entry(tab1, show = "*")
-        en.insert(0, "")
-        en.place(
-            x = 205,
-            y = item['y'],
-            width = 200,
-            height = 25
-        )
-        databaseEntryFields.append(en)
-    else:
-        en = Entry(tab1)
-        en.insert(0, "")
-        en.place(
-            x = 205,
-            y = item['y'],
-            width = 200,
-            height = 25
-        )
-        databaseEntryFields.append(en)
-
-
-Label(
-    tab1,
-    text = "Connection"
-).place(
-    x = 0,
-    y = 100,
-    width = 200,
-    height = 25
+# label and input field for database information
+label_db = Label(tab1, text = "Database")
+label_db.place(
+    x = styles.label['x-axis'],
+    y = 0,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_db = Entry(tab1)
+input_db.insert(0, "")
+input_db.place(
+    x = styles.input['x-axis'],
+    y = 0,
+    width = styles.input['width'],
+    height = styles.input['height']
 )
 
 
+# label and input field for user information
+user_label = Label(tab1, text = "User")
+user_label.place(
+    x = styles.label['x-axis'],
+    y = 20,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_user = Entry(tab1)
+input_user.insert(0, "")
+input_user.place(
+    x = styles.input['x-axis'],
+    y = 20,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+
+
+# label and input field for password
+pw_label = Label(tab1, text = "Password")
+pw_label.place(
+    x = styles.label['x-axis'],
+    y = 40,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_pw = Entry(tab1, show = '*')
+input_pw.insert(0, "")
+input_pw.place(
+    x = styles.input['x-axis'],
+    y = 40,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+
+
+# label and input field for host information
+host_label = Label(tab1, text = "Host")
+host_label.place(
+    x = styles.label['x-axis'],
+    y = 60,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_host = Entry(tab1)
+input_host.insert(0, "")
+input_host.place(
+    x = styles.input['x-axis'],
+    y = 60,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+
+
+# label and input field for the connection status
+connection_label = Label(tab1, text = "Connection")
+connection_label.place(
+    x = styles.label['x-axis'],
+    y = 100,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
 connection = StringVar()
 connection.set('not established')
-entryConnection = Entry(
+input_connection = Entry(
     tab1,
     textvariable = connection,
     state = "disabled"
 )
-entryConnection.place(
-    x = 205,
+input_connection.place(
+    x = styles.input['x-axis'],
     y = 100,
-    width = 200,
-    height = 25
+    width = styles.input['width'],
+    height = styles.input['height']
 )
 connection.trace("w", set_connstate)
 
 
-# generate a button for log in into database
-Button(
+# generate a button for login into database
+connection_button = Button(
     tab1,
     text = "Connect",
     command = lambda: openDB(
-        database = databaseEntryFields[0].get(),
-        user = databaseEntryFields[1].get(),
-        password = databaseEntryFields[2].get(),
-        host = databaseEntryFields[3].get()
+        database = input_db.get(),
+        user = input_user.get(),
+        password = input_pw.get(),
+        host = input_host.get()
     )
-).place(
+)
+connection_button.place(
     x = 80,
     y = 175,
-    width = 200,
-    height = 25
+    width = styles.button['width'],
+    height = styles.button['height']
 )
 
 note.grid(

@@ -10,76 +10,57 @@ note.add(
 )
 
 
-# list for labels
-tableDict = [
-    {
-        'name': 'Name',
-        'y': 0
-    }
-]
+# label and input field for table name
+label_tablename = Label(
+    tab2,
+    text = 'Name'
+)
+label_tablename.place(
+    x = styles.label['x-axis'],
+    y = 0,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_tablename = Entry(tab2)
+input_tablename.insert(0, "")
+input_tablename.place(
+    x = styles.input['x-axis'],
+    y = 0,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
 
 
-# list for entry fields
-tableEntryFields = []
-
-
-# generate label defined in tableDict
-for item in tableDict:
-    Label(
-        tab2,
-        text = item['name']
-    ).place(
-        x = 0,
-        y = item['y'],
-        width = 200,
-        height = 25
+# button to add a table with given user information
+button_addTable = Button(
+    tab2,
+    text = 'Add table',
+    command = lambda: addTable(
+        table = input_tablename.get()
     )
-    en = Entry(tab2)
-    en.insert(0, "")
-    en.place(
-        x = 205,
-        y = item['y'],
-        width = 200,
-        height = 25
+)
+button_addTable.place(
+    x = 80,
+    y = 175,
+    width = styles.button['width'],
+    height = styles.button['height']
+)
+
+
+# button to drop a table with given information
+button_deleteTable = Button(
+    tab2,
+    text = 'Delete table',
+    command = lambda: dropTable(
+        table = input_tablename.get()
     )
-    tableEntryFields.append(en)
+)
+button_deleteTable.place(
+    x = 280,
+    y = 175,
+    width = styles.button['width'],
+    height = styles.button['height']
+)
 
-
-buttons = [
-    {
-        'name': 'Add table',
-        'command': lambda: addTable(
-            table = tableEntryFields[0].get()
-        ),
-        'x': 80,
-        'y': 175,
-        'width': 200,
-        'height': 25
-    },
-    {
-        'name': 'Delete table',
-        'command': lambda: dropTable(
-            table = tableEntryFields[0].get()
-        ),
-        'x': 280,
-        'y': 175,
-        'width': 200,
-        'height': 25
-    }
-]
-
-
-# generate button specified in buttons
-for button in buttons:
-    Button(
-        tab2,
-        text = button['name'],
-        command = button['command']
-    ).place(
-        x = button['x'],
-        y = button['y'],
-        width = button['width'],
-        height = button['height']
-    )
 
 note.grid()

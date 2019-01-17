@@ -16,6 +16,9 @@ import psycopg2
 import subprocess
 import time
 
+# import the main styling for buttons, inputFields etc.
+import styles
+
 timestamp = str(datetime.now())
 
 # check whether logfile exists; else create it
@@ -40,6 +43,7 @@ root.minsize(
     width = globalWidth,
     height = globalHeight
 )
+# TODO: make this resizable?
 root.resizable(
     width = False,
     height = False
@@ -49,7 +53,9 @@ note = Notebook(root)
 
 
 # width of note for responsiveness
-widgetWidth = 650
+widgetWidth = 650 # it seems that this is obsolete --> test!
+#widgetWidth = globalWidth - 110
+#widgthHeight = globalHeight - 50
 
 
 # list of logic scripts
