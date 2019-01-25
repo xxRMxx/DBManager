@@ -10,73 +10,80 @@ note.add(
     text = "Diagram"
 )
 
-# list for labels
-diagramDict = [
-    {
-        'name': 'Database',
-        'y': 0
-    },
-    {
-        'name': 'User',
-        'y': 20
-    },
-    {
-        'name': 'Table',
-        'y': 40
-    }
-]
 
-# list for diagram entry fields
-diagramEntryFields = []
-
-buttons = [
-    {'name': 'Create diagram',
-     'command': lambda: createDia(
-        database = diagramEntryFields[0].get(),
-        user = diagramEntryFields[1].get(),
-        table = diagramEntryFields[2].get()
-        ),
-     'x': 80,
-     'y': 175,
-     'width': 200,
-     'height': 25
-    }
-]
+# this list contains all input fields in this tab
+diagramInputFields = []
 
 
-# loop over every label in tableLabels
-for item in diagramDict:
-    Label(
-        tab8,
-        text = item['name']
-    ).place(
-            x = 0,
-            y = item['y'],
-            width = 200,
-            height = 25
+# label and input field for database information
+label_database = Label(tab8, text = 'Database')
+label_database.place(
+    x = styles.label['x-axis'],
+    y = 0,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_database = Entry(tab8)
+input_database.insert(0, "")
+input_database.place(
+    x = styles.input['x-axis'],
+    y = 0,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+diagramInputFields.append(input_database)
+
+
+# label and input field for user information
+label_user = Label(tab8, text = 'User')
+label_user.place(
+    x = styles.label['x-axis'],
+    y = 20,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_user = Entry(tab8)
+input_user.insert(0, "")
+input_user.place(
+    x = styles.input['x-axis'],
+    y = 20,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+diagramInputFields.append(input_user)
+
+
+# label and input field for table information
+label_table = Label(tab8, text = 'Table')
+label_table.place(
+    x = styles.label['x-axis'],
+    y = 40,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_table = Entry(tab8)
+input_table.insert(0, "")
+input_table.place(
+    x = styles.input['x-axis'],
+    y = 40,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+diagramInputFields.append(input_table)
+
+
+# button to create the diagram
+button_createDiagram = Button(
+    tab8,
+    text = 'Create diagram',
+    command = lambda: createDia(
+        user = diagramInputFields[1].get(), # input_user
+        table = diagramInputFields[2].get() # input_table
     )
-    en = Entry(tab8)
-    en.insert(0, "")
-    en.place(
-            x = 205,
-            y = item['y'],
-            width = 200,
-            height = 25
-            )
-    diagramEntryFields.append(en)
-
-# loop over every button in buttons
-for button in buttons:
-    Button(
-        tab8,
-        text = button['name'],
-        width = 25,
-        command = button['command']
-    ).place(
-        x = button['x'],
-        y = button['y'],
-        width = button['width'],
-        height = button['height']
-    )
-
-note.grid()
+)
+button_createDiagram.place(
+    x = 80,
+    y = 175,
+    width = styles.button['width'],
+    height = styles.button['height']
+)

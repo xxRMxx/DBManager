@@ -10,6 +10,10 @@ note.add(
 )
 
 
+# this list contains all input fields in this tab
+tableInputFields = []
+
+
 # label and input field for table name
 label_tablename = Label(
     tab2,
@@ -29,6 +33,7 @@ input_tablename.place(
     width = styles.input['width'],
     height = styles.input['height']
 )
+tableInputFields.append(input_tablename)
 
 
 # button to add a table with given user information
@@ -36,7 +41,7 @@ button_addTable = Button(
     tab2,
     text = 'Add table',
     command = lambda: addTable(
-        table = input_tablename.get()
+        table = tableInputFields[0].get() # input_tablename
     )
 )
 button_addTable.place(
@@ -52,7 +57,7 @@ button_deleteTable = Button(
     tab2,
     text = 'Delete table',
     command = lambda: dropTable(
-        table = input_tablename.get()
+        table = tableInputFields[0].get() # input_tablename
     )
 )
 button_deleteTable.place(
@@ -61,6 +66,3 @@ button_deleteTable.place(
     width = styles.button['width'],
     height = styles.button['height']
 )
-
-
-note.grid()

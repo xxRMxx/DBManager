@@ -4,6 +4,14 @@
 # The DBManager is an API for database communication
 # supported databases: Postgres
 
+# TODO
+# responsiveness
+# database analyzer
+# more fresh design
+# show application logo when in window switcher
+# in foreign key view there is no hote.grid() at end --> valdiate if needed
+
+
 # import things for database communication and system processes
 from Tkinter import *
 from ttk import *
@@ -19,6 +27,7 @@ import time
 # import the main styling for buttons, inputFields etc.
 import styles
 
+
 timestamp = str(datetime.now())
 
 # check whether logfile exists; else create it
@@ -30,18 +39,12 @@ except:
 filename = '/var/log/dbmanager.log'
 
 
-# global width and height
-globalWidth = 762 # fixed length
-globalHeight = 275 # fixed length
-backgroundcolour = '#A9E2F3'
-
-
 # build the gui
 root = Tk()
 root.title("DBManager")
 root.minsize(
-    width = globalWidth,
-    height = globalHeight
+    width = styles.globalWidth,
+    height = styles.globalHeight
 )
 # TODO: make this resizable?
 root.resizable(
@@ -50,12 +53,6 @@ root.resizable(
 )
 
 note = Notebook(root)
-
-
-# width of note for responsiveness
-widgetWidth = 650 # it seems that this is obsolete --> test!
-#widgetWidth = globalWidth - 110
-#widgthHeight = globalHeight - 50
 
 
 # list of logic scripts

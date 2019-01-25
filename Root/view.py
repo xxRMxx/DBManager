@@ -2,27 +2,6 @@
 # -*- coding: utf-8 -*-
 
 
-# buttons for showing db structure
-menuoptions = [
-    {
-        'label': 'Databases',
-        'command': showDatabases
-    },
-    {
-        'label': 'Users',
-        'command': showUsers
-    },
-    {
-        'label': 'Tables',
-        'command': showTables
-    },
-    {
-        'label': 'Columns',
-        'command': showColumns
-    }
-]
-
-
 # build application menu
 menu = Menu(root)
 root.config(menu = menu)
@@ -33,7 +12,7 @@ filemenu = Menu(menu)
 menu.add_cascade(
     label = "Options",
     menu = filemenu
-    )
+)
 
 submenu = Menu(menu)
 
@@ -42,11 +21,29 @@ filemenu.add_cascade(
     menu = submenu
 )
 
-# loop over options and create some buttons
-for item in menuoptions:
-    submenu.add_command(
-        label = item['label'],
-        command = item['command']
+
+# button to display all available databases
+submenu.add_command(
+    label = 'Databases',
+    command = showDatabases
+)
+
+# display all available users
+submenu.add_command(
+    label = 'Users',
+    command = showUsers
+)
+
+# show all tables in current db
+submenu.add_command(
+    label = 'Tables',
+    command = showTables
+)
+
+# show all columns of given table
+submenu.add_command(
+    label = 'Columns',
+    command = showColumns
 )
 
 

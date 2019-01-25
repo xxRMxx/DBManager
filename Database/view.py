@@ -10,6 +10,10 @@ note.add(
 )
 
 
+# this list contains all input fields in this tab
+databaseInputFields = []
+
+
 # label and input field for database information
 label_db = Label(tab1, text = "Database")
 label_db.place(
@@ -26,6 +30,7 @@ input_db.place(
     width = styles.input['width'],
     height = styles.input['height']
 )
+databaseInputFields.append(input_db)
 
 
 # label and input field for user information
@@ -44,6 +49,7 @@ input_user.place(
     width = styles.input['width'],
     height = styles.input['height']
 )
+databaseInputFields.append(input_user)
 
 
 # label and input field for password
@@ -62,6 +68,7 @@ input_pw.place(
     width = styles.input['width'],
     height = styles.input['height']
 )
+databaseInputFields.append(input_pw)
 
 
 # label and input field for host information
@@ -80,6 +87,7 @@ input_host.place(
     width = styles.input['width'],
     height = styles.input['height']
 )
+databaseInputFields.append(input_host)
 
 
 # label and input field for the connection status
@@ -100,7 +108,7 @@ input_connection = Entry(
 input_connection.place(
     x = styles.input['x-axis'],
     y = 100,
-    width = styles.input['width'],
+    width = 300,
     height = styles.input['height']
 )
 connection.trace("w", set_connstate)
@@ -111,10 +119,10 @@ connection_button = Button(
     tab1,
     text = "Connect",
     command = lambda: openDB(
-        database = input_db.get(),
-        user = input_user.get(),
-        password = input_pw.get(),
-        host = input_host.get()
+        database = databaseInputFields[0].get(), # input_database
+        user = databaseInputFields[1].get(), # input_user
+        password = databaseInputFields[2].get(), # input_password
+        host = databaseInputFields[3].get() # input_host
     )
 )
 connection_button.place(
@@ -123,6 +131,7 @@ connection_button.place(
     width = styles.button['width'],
     height = styles.button['height']
 )
+
 
 note.grid(
     ipady = 125

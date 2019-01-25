@@ -10,68 +10,40 @@ note.add(
 )
 
 
-# list for labels
-sequenceDict = [
-    {
-        'name': 'Table',
-        'y': 0
-    }
-]
+# this list contains all input fields in this tab
+sequenceInputFields = []
 
 
-# list for sequence entry fields
-sequenceEntryFields = []
+# label and input field for sequence of table
+label_sequence = Label(tab6, text = 'Table')
+label_sequence.place(
+    x = styles.label['x-axis'],
+    y = 0,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_sequence = Entry(tab6)
+input_sequence.insert(0, "")
+input_sequence.place(
+    x = 205,
+    y = 0,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+sequenceInputFields.append(input_sequence)
 
 
-# list for buttons
-buttons = [
-    {
-        'name': 'Reset sequence',
-        'command': lambda: setSequence(
-            table = sequenceEntryFields[0].get()
-        ),
-        'x': 80,
-        'y': 175,
-        'width': 200,
-        'height': 25
-    }
-]
-
-
-# generate label specified in sequenceDict
-for item in sequenceDict:
-    Label(
-        tab6,
-        text = item['name']
-    ).place(
-        x = 0,
-        y = item['y'],
-        width = 200,
-        height = 25
+# button to reset sequence of specified table
+button_resetSequence = Button(
+    tab6,
+    text = 'Reset sequence',
+    command = lambda: setSequence(
+        table = sequenceInputFields[0].get() # input_sequence
     )
-    en = Entry(tab6)
-    en.insert(0, "")
-    en.place(
-        x = 205,
-        y = item['y'],
-        width = 200,
-        height = 25
-    )
-    sequenceEntryFields.append(en)
-
-
-# generate button defined in buttons
-for button in buttons:
-    Button(
-        tab6,
-        text = button['name'],
-        width = 25,
-        command = button['command']
-    ).place(
-        x = button['x'],
-        y = button['y'],
-        width = button['width'],
-        height = button['height']
-    )
-
-note.grid()
+)
+button_resetSequence.place(
+    x = 80,
+    y = 175,
+    width = styles.button['width'],
+    height = styles.button['height']
+)

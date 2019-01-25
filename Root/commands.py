@@ -35,14 +35,14 @@ def reset():
     # list for all entry fields in application
     entryFields = []
     # append all entry fields of every view to list
-    entryFields.append(databaseEntryFields)
-    entryFields.append(tableEntryFields)
-    entryFields.append(mxntableEntryFields)
-    entryFields.append(columnEntryFields)
-    entryFields.append(foreignkeyEntryFields)
-    entryFields.append(sequenceEntryFields)
-    entryFields.append(contentEntryFields)
-    entryFields.append(diagramEntryFields)
+    entryFields.append(input_database)
+    entryFields.append(input_table)
+    entryFields.append(input_mxntable)
+    entryFields.append(input_column)
+    entryFields.append(input_foreignkey)
+    entryFields.append(input_sequence)
+    entryFields.append(input_content)
+    entryFields.append(input_diagram)
     # for every entry field in every view
     # delete user entry and insert an empty string
 
@@ -69,14 +69,14 @@ def showDatabases():
         infoField = textFieldInfo.get(1.0, 'end-1c')
 
         if infoField == "":
-            for x in databases:
-                x ="%s\n" % (x[0])
-                textFieldInfo.insert(END, x)
+            for database in databases:
+                database = "%s\n" % (database)
+                textFieldInfo.insert(END, database)
         else:
             textFieldInfo.delete(1.0, END)
-            for x in databases:
-                x = "%s\n" % (x[0])
-                textFieldInfo.insert(END, x)
+            for database in databases:
+                database = "%s\n" % (database)
+                textFieldInfo.insert(END, database)
     except:
         rollback("error: getting databases")
 
@@ -91,22 +91,22 @@ def showUsers():
         infoField = textFieldInfo.get(1.0, 'end-1c')
 
         if infoField == "":
-            for x in users:
-                x = "%s\n" % (x[0])
-                textFieldInfo.insert(END, x)
+            for user in users:
+                user = "%s\n" % (user)
+                textFieldInfo.insert(END, user)
         else:
             textFieldInfo.delete(1.0, END)
-            for x in users:
-                x = "%s\n" % (x[0])
-                textFieldInfo.insert(END, x)
+            for user in users:
+                user = "%s\n" % (user)
+                textFieldInfo.insert(END, user)
     except:
         rollback("error: getting users")
 
 
 # show tables in current database
 def showTables():
-    databasename = databaseEntryFields[0].get()
-    user = databaseEntryFields[1].get()
+    databasename = databaseInputFields[0].get()
+    user = databaseInputFields[1].get()
     infoField = textFieldInfo.get(1.0, 'end-1c')
 
     try:
@@ -132,14 +132,14 @@ def showTables():
 def showColumns():
     infoField = textFieldInfo.get(1.0, 'end-1c')
     tableList = [
-        {'table': tableEntryFields[0]},
-        {'table': columnEntryFields[0]},
-        {'table': foreignkeyEntryFields[0]},
-        {'table': sequenceEntryFields[0]},
-        {'table': contentEntryFields[0]},
-        {'table': diagramEntryFields[2]}
+        {'table': tableInputFields[0].get()},
+        #{'table': columnEntryFields[0]},
+        #{'table': foreignkeyEntryFields[0]},
+        #{'table': sequenceEntryFields[0]},
+        #{'table': contentEntryFields[0]},
+        #{'table': diagramEntryFields[2]}
     ]
-    
+
     for item in tableList:
         if item['table'] == "":
             textFieldInfo.delete(1.0, END)

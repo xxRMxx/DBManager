@@ -6,7 +6,7 @@
 def setSequence(table):
     try:
         begin("Restart sequence")
-        cur.execute("alter sequence %s_%s_id_seq restart" % (sequence, sequence))
+        cur.execute("alter sequence %s_%s_id_seq restart" % (table, table))
         commit("Restart sequence successful")
     except:
         rollback("Restart sequence failed")

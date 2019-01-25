@@ -9,77 +9,66 @@ note.add(
     text = "MxN-table"
 )
 
-# list for labels
-mxntableDict = [
-    {
-        'name': 'Name',
-        'y': 0
-    }
-]
+# this list contains all input fields in this tab
+mxntableInputFields = []
 
 
-# list for entry fields
-mxntableEntryFields = []
+# label and input field for mxntable information
+label_mxntable = Label(tab3, text = 'Name')
+label_mxntable.place(
+    x = styles.label['x-axis'],
+    y = 0,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_mxntable = Entry(tab3)
+input_mxntable.insert(0, "")
+input_mxntable.place(
+    x = 205,
+    y = 0,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+mxntableInputFields.append(input_mxntable)
 
 
-# list for buttons
-buttons = [
-    {
-        'name': 'Add MxN-table',
-        'command': lambda: addMxNTable(
-            mxntable = mxntableEntryFields[0].get()
-        ),
-        'x': 80,
-        'y': 175,
-        'width': 200,
-        'height': 25
-    },
-    {
-        'name': 'Delete MxN-table',
-        'command': lambda: dropMxNTable(
-            mxntable = mxntableEntryFields[0].get()
-        ),
-        'x': 280,
-        'y': 175,
-        'width': 200,
-        'height': 25
-    }
-]
+# display a hint
+label_hint = Label(tab3, text = 'If you enter the scheme "tbl1xtbl2"\nreferrenced tables will be created automatically.')
+label_hint.place(
+    x = 175,
+    y = 20,
+    width = 360,
+    height = 50
+)
 
 
-# generate label specified mxntabledict
-for item in mxntableDict:
-    Label(
-        tab3,
-        text = item['name']
-    ).place(
-        x = 0,
-        y = item['y'],
-        width = 200,
-        height = 25
+# button to add mxn table with given user information
+button_addMxNTable = Button(
+    tab3,
+    text = 'Add MxN-Table',
+    command = lambda: addMxNTable(
+        mxntable = mxntableInputFields[0].get() # input_mxntable
     )
-    en = Entry(tab3)
-    en.insert(0, "")
-    en.place(
-        x = 205,
-        y = item['y'],
-        width = 200,
-        height = 25
-    )
-    mxntableEntryFields.append(en)
+)
+button_addMxNTable.place(
+    x = 80,
+    y = 175,
+    width = 200,
+    height = 25
+)
 
 
-# generate button specified buttons
-for button in buttons:
-    Button(
-        tab3,
-        text = button['name'],
-        command = button['command']
-    ).place(
-        x = button['x'],
-        y = button['y'],
-        width = button['width'],
-        height = button['height']
+# button to delete mxn table with given user information
+button_deleteMxNTable = Button(
+    tab3,
+    text = 'Delete MxN-Table',
+    command = lambda: dropMxNTable(
+        mxntable = mxntableInputFields[0].get() # input_mxntable
     )
-    
-note.grid()
+)
+button_deleteMxNTable.place(
+    x = 280,
+    y = 175,
+    width = styles.button['width'],
+    height = styles.button['height']
+)

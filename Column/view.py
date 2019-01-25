@@ -10,6 +10,13 @@ note.add(
 )
 
 
+# TODO:
+# add option for nullable, index and default value
+
+# this list contains all input fields in this tab
+columnInputFields = []
+
+
 # label and input field for table information
 label_tablename = Label(
     tab4,
@@ -29,6 +36,7 @@ input_tablename.place(
     width = styles.input['width'],
     height = styles.input['height']
 )
+columnInputFields.append(input_tablename)
 
 
 # label and input field for column name
@@ -50,6 +58,7 @@ input_columnname.place(
     width = styles.input['width'],
     height = styles.input['height']
 )
+columnInputFields.append(input_columnname)
 
 
 # label and input field for column type
@@ -71,6 +80,7 @@ input_columntype.place(
     width = styles.input['width'],
     height = styles.input['height']
 )
+columnInputFields.append(input_columntype)
 
 
 # button to add a column with user given type
@@ -78,9 +88,9 @@ button_addColumn = Button(
     tab4,
     text = 'Add column',
     command = lambda: addColumn(
-        table = input_tablename.get(),
-        column = input_columnname.get(),
-        columntype = input_columntype.get()
+        table = columnInputFields[0].get(), # input_tablename
+        column = columnInputFields[1].get(), # input_colname
+        columntype = columnInputFields[2].get() # input_columntype
     )
 )
 button_addColumn.place(
@@ -96,9 +106,9 @@ button_deleteColumn = Button(
     tab4,
     text = 'Delete column',
     command = lambda: dropColumn(
-        table = input_tablename.get(),
-        column = input_columnname.get()
-    ),
+        table = columnInputFields[0].get(), # input_tablename
+        column = columnInputFields[1].get() # input_columnname
+    )
 )
 button_deleteColumn.place(
     x = 280,
@@ -106,6 +116,3 @@ button_deleteColumn.place(
     width = styles.button['width'],
     height = styles.button['height']
 )
-
-
-note.grid()
