@@ -31,5 +31,5 @@ def createDia(user, table):
             shell = True
         )
         writeTarget("creating svg file successfull")
-    except: # describe the concrete exception
+    except:
         writeTarget("creating svg file not successfull")

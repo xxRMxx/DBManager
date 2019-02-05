@@ -83,6 +83,28 @@ input_columntype.place(
 columnInputFields.append(input_columntype)
 
 
+# label and input field for index name
+label_index = Label(
+    tab4,
+    text = 'Index'
+)
+label_index.place(
+    x = styles.label['x-axis'],
+    y = 60,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_index = Entry(tab4)
+input_index.insert(0, "")
+input_index.place(
+    x = styles.input['x-axis'],
+    y = 60,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+columnInputFields.append(input_index)
+
+
 # button to add a column with user given type
 button_addColumn = Button(
     tab4,
@@ -113,6 +135,73 @@ button_deleteColumn = Button(
 button_deleteColumn.place(
     x = 280,
     y = 175,
+    width = styles.button['width'],
+    height = styles.button['height']
+)
+
+
+# button to add index to specific column
+button_addIndex = Button(
+    tab4,
+    text = 'Add index',
+    command = lambda: addIndex(
+        table = columnInputFields[0].get(),
+        column = columnInputFields[1].get(),
+        index = columnInputFields[3].get()
+    )
+)
+button_addIndex.place(
+    x = 80,
+    y = 200,
+    width = styles.button['width'],
+    height = styles.button['height']
+)
+
+
+# button to start analysis for given table and column information
+button_dropIndex = Button(
+    tab4,
+    text = 'Drop index',
+    command = lambda: dropIndex(
+        index = columnInputFields[3].get()
+    )
+)
+button_dropIndex.place(
+    x = 280,
+    y = 200,
+    width = styles.button['width'],
+    height = styles.button['height']
+)
+
+
+# button to analyze specific column
+button_analyze = Button(
+    tab4,
+    text = 'Analyze column',
+    command = lambda: analyzeColumn(
+        table = columnInputFields[0].get(),
+        column = columnInputFields[1].get()
+    )
+)
+button_analyze.place(
+    x = 80,
+    y = 225,
+    width = styles.button['width'],
+    height = styles.button['height']
+)
+
+
+# button to vacuum specific column
+button_vacuum = Button(
+    tab4,
+    text = 'Vacuuming column',
+    command = lambda: vacuumColumn(
+        column = columnInputFields[0].get()
+    )
+)
+button_vacuum.place(
+    x = 280,
+    y = 225,
     width = styles.button['width'],
     height = styles.button['height']
 )

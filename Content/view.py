@@ -109,6 +109,25 @@ input_wherecontent.place(
 contentInputFields.append(input_wherecontent)
 
 
+# label and input field for query statement
+label_query = Label(tab7, text = 'Query')
+label_query.place(
+    x = styles.label['x-axis'],
+    y = 100,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+input_query = Entry(tab7)
+input_query.insert(0, "")
+input_query.place(
+    x = styles.input['x-axis'],
+    y = 100,
+    width = styles.input['width'],
+    height = styles.input['height']
+)
+contentInputFields.append(input_query)
+
+
 # button to start insertation in database
 button_insertContent = Button(
     tab7,
@@ -167,15 +186,17 @@ button_deleteContent.place(
 )
 
 
-
-# this button is for hiding the content until tab is fully implemented
-#Button(
-#    tab7,
-#    text = "Not implemented yet",
-#    state = DISABLED
-#).place(
-#    x = 0,
-#    y = 0,
-#    width = 600,
-#    height = 300
-#)
+# send query to db
+button_sendQuery = Button(
+    tab7,
+    text = 'Send query',
+    command = lambda: sendQuery(
+        query = contentInputFields[5].get(), # input_query
+    )
+)
+button_sendQuery.place(
+    x = 0,
+    y = 200,
+    width = styles.button['width'],
+    height = styles.button['height']
+)

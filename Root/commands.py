@@ -2,54 +2,31 @@
 # -*- coding: utf-8 -*-
 
 
-# function for log in
-def writeTarget(string):
-    target = open(filename, 'a')
-    target.write(timestamp + ": %s\n" % (string))
-    target.close()
-
-
-def begin(string):
-    cur.execute("begin")
-    writeTarget(string)
-
-
-def commit(string):
-    cur.execute("commit")
-    textFieldInfo.delete(1.0, END)
-    textFieldInfo.insert(1.0, string)
-    writeTarget(string)
-
-
-def rollback(string):
-    try:
-        cur.execute("rollback")
-        textFieldInfo.delete(1.0, END)
-        textFieldInfo.insert(1.0, string)
-        writeTarget(string)
-    except AttributeError:
-        writeTarget("No connection string defined. Rollback.")
-
-
 def reset():
-    # list for all entry fields in application
-    entryFields = []
-    # append all entry fields of every view to list
-    entryFields.append(input_database)
-    entryFields.append(input_table)
-    entryFields.append(input_mxntable)
-    entryFields.append(input_column)
-    entryFields.append(input_foreignkey)
-    entryFields.append(input_sequence)
-    entryFields.append(input_content)
-    entryFields.append(input_diagram)
-    # for every entry field in every view
-    # delete user entry and insert an empty string
 
-    for entries in entryFields:
-        for en in entries:
-            en.delete(0, END)
-            en.insert(0, "")
+    # list for all input fields in application
+    entryFields = []
+
+    # append all input fields of every view to list
+    entryFields.append(databaseInputFields)
+    entryFields.append(tableInputFields)
+    entryFields.append(mxntableInputFields)
+    entryFields.append(columnInputFields)
+    entryFields.append(foreignkeyInputFields)
+    entryFields.append(sequenceInputFields)
+    entryFields.append(contentInputFields)
+    entryFields.append(analyzerInputFields)
+    entryFields.append(diagramInputFields)
+
+    # loop over every input field and clear it
+    for entry in entryFields:
+        for item in entry:
+            try:
+                item.delete(0, END)
+                item.insert(0, '')
+            except AttributeError:
+                # pass when input field is of type option menu
+                pass
 
     writeTarget("Reset user entries successful")
 
@@ -60,54 +37,57 @@ def help():
 
 
 # show databases
-def showDatabases():
+def showDatabases(event = None):
+
+    # functions needs an event argument to handle keyboard shortcut (e.g. <F1>)
+
     try:
         begin("Show available databases")
         getDatabases = cur.execute("select datname from pg_database where datistemplate is False")
         databases = cur.fetchall()
-        commit("success: get available databases")
-        infoField = textFieldInfo.get(1.0, 'end-1c')
+        commit("SUCCESS: get available databases")
 
-        if infoField == "":
-            for database in databases:
-                database = "%s\n" % (database)
-                textFieldInfo.insert(END, database)
-        else:
-            textFieldInfo.delete(1.0, END)
-            for database in databases:
-                database = "%s\n" % (database)
-                textFieldInfo.insert(END, database)
+        text_info.delete(1.0, END)
+        text_info.insert(END, 'DATABASES: \n')
+
+        for database in databases:
+            database = "%s\n" % (database)
+            text_info.insert(END, database)
+
     except:
-        rollback("error: getting databases")
+        rollback("FAILED: get databases")
 
 
 # show database users
-def showUsers():
+def showUsers(event = None):
+
+    # functions needs an event argument to handle keyboard shortcut (e.g. <F2>)
+
     try:
         begin("Show available users")
         getUsernames = cur.execute("select usename from pg_user")
         users = cur.fetchall()
         commit("success: get available users")
-        infoField = textFieldInfo.get(1.0, 'end-1c')
 
-        if infoField == "":
-            for user in users:
-                user = "%s\n" % (user)
-                textFieldInfo.insert(END, user)
-        else:
-            textFieldInfo.delete(1.0, END)
-            for user in users:
-                user = "%s\n" % (user)
-                textFieldInfo.insert(END, user)
+        text_info.delete(1.0, END)
+        text_info.insert(END, 'USERS: \n')
+
+        for user in users:
+            user = "%s\n" % (user)
+            text_info.insert(END, user)
+
     except:
-        rollback("error: getting users")
+        rollback("FAILED: get users")
 
 
 # show tables in current database
-def showTables():
+def showTables(event = None):
+
+    # functions needs an event argument to handle keyboard shortcut (e.g. <F3>)
+
     databasename = databaseInputFields[0].get()
     user = databaseInputFields[1].get()
-    infoField = textFieldInfo.get(1.0, 'end-1c')
+
 
     try:
         begin("Show available tables")
@@ -115,48 +95,41 @@ def showTables():
         tables = cur.fetchall()
         commit("success: get available tables")
 
-        if infoField == "":
-            for x in tables:
-                x = "%s\n" % (x[0])
-                textFieldInfo.insert(END, x)
-        else:
-            textFieldInfo.delete(1.0, END)
-            for x in tables:
-                x = "%s\n" % (x[0])
-                textFieldInfo.insert(END, x)
+        text_info.delete(1.0, END)
+        text_info.insert(END, 'TABLES: \n')
+
+        for table in tables:
+                table = "%s\n" % (table)
+                text_info.insert(END, table)
+
     except:
-        rollback("error: getting tables")
+        rollback("FAILED: No tables in current database found")
 
 
 # show columns for given tablename
-def showColumns():
-    infoField = textFieldInfo.get(1.0, 'end-1c')
-    tableList = [
-        {'table': tableInputFields[0].get()},
-        #{'table': columnEntryFields[0]},
-        #{'table': foreignkeyEntryFields[0]},
-        #{'table': sequenceEntryFields[0]},
-        #{'table': contentEntryFields[0]},
-        #{'table': diagramEntryFields[2]}
-    ]
+def showColumns(event = None):
 
-    for item in tableList:
-        if item['table'] == "":
-            textFieldInfo.delete(1.0, END)
-            textFieldInfo.insert(END, "Enter table name first")
-        elif item['table'] != "":
-            textFieldInfo.delete(1.0, END)
-            try:
-                table = item['table']
-                begin("Show columns of table %s" % (table))
-                getTablenames = cur.execute("select (column_name || ' | ' || data_type) as information from information_schema.columns where table_name like '%s'" % (table))
-                columns = cur.fetchall()
-                commit("success: getting columns of table %s" % (table))
+    # functions needs an event argument to handle keyboard shortcut (e.g. <F4>)
 
-                for x in columns:
-                    x = "%s\n" (x[0])
-                    textFieldInfo.insert(END, x)
-            except:
-                rollback("error: getting columns of table %s" % (table))
-        else:
-            rollback("error: infoField empty or missing table")
+    info = text_info.get(1.0, 'end-1c')
+    table = tableInputFields[0].get()
+
+    if table == "":
+        text_info.delete(1.0, END)
+        text_info.insert(END, "NOTE: Insert table name in tab <table> first")
+    else:
+        try:
+
+            begin("Show columns of table %s" % (table))
+            getTablenames = cur.execute("select (column_name || ' (' || data_type || ')') as information from information_schema.columns where table_name = '%s'" % (table))
+            columns = cur.fetchall()
+            commit("SUCCESS: get columns of table %s" % (table))
+
+            text_info.delete(1.0, END)
+            text_info.insert(END, 'COLUMNS: \n')
+
+            for column in columns:
+                column = "%s\n" % (column)
+                text_info.insert(END, column)
+        except:
+            rollback("FAILED: %s contains no columns" % (table))

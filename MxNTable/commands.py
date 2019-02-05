@@ -17,23 +17,22 @@ def addMxNTable(mxntable):
             mxn_seperator = False
             print('No unique seperator to create two tables automatically.')
 
-    print(mxn_seperator)
     if mxn_seperator:
         try:
             begin("Create mxntable %s" % (mxntable))
             cur.execute("create table %s (%s_id serial primary key, %s_modtime timestamp with time zone, %s_author varchar(80))" % (table1, table1, table1, table1))
             cur.execute("create table %s (%s_id serial primary key, %s_modtime timestamp with time zone, %s_author varchar(80))" % (table2, table2, table2, table2))
             cur.execute("create table %s (%s_id serial primary key, %s_modtime timestamp with time zone, %s_author varchar(80), %s_id bigint references %s (%s_id), %s_id bigint references %s (%s_id))" % (mxntable, mxntable, mxntable, mxntable, table1, table1, table1, table2, table2, table2))
-            commit("Add table %s, table %s and mxntable %s successful" % (table1, table2, mxntable))
+            commit("SUCCESS: CREATE TABLE %s; CREATE TABLE %s; CREATE TABLE %s;" % (mxntable, table1, table2))
         except:
-            rollback("Add table %s, table %s and mxntable %s failed" % (table1, table2, mxntable))
+            rollback("FAILED: CREATE TABLE %s;" % (mxntable))
     else:
         try:
             begin('Create mxntable %s' % (mxntable))
             cur.execute("create table %s (%s_id serial primary key, %s_modtime timestamp with time zone, %s_author varchar(80))" % (mxntable, mxntable, mxntable, mxntable))
-            commit('Add table %s successful' % (mxntable))
-        except Exception:
-            rollback('Create of mxntable %s failed.' % (mxntable))
+            commit('SUCCESS: CREATE TABLE %s;' % (mxntable))
+        except:
+            rollback('FAILED: CREATE TABLE %s;' % (mxntable))
 
 
 # drop mxntable
@@ -44,8 +43,7 @@ def dropMxNTable(mxntable):
         "Do you really want to drop mxn table %s?" % (mxntable))
 
     if not val:
-        return False
-        #return None
+        return None
 
     mxn_seperator = False
 
@@ -66,13 +64,13 @@ def dropMxNTable(mxntable):
             cur.execute("drop table %s" % (mxntable))
             cur.execute("drop table %s" % (table1))
             cur.execute("drop table %s" % (table2))
-            commit("Drop table %s, table %s and mxntable %s successful" % (table1, table2, mxntable))
+            commit("SUCCESS. DROP TABLE %s; DROP TABLE %s; DROP TABLE %s;" % (mxntable, table1, table2))
         except:
-            rollback("Drop table %s, table %s and mxntable %s failed" % (table1, tabl2, mxntable))
+            rollback("FAILED: DROP TABLE %s;" % (mxntable))
     else:
         try:
             begin('Drop mxntable %s' % (mxntable))
             cur.execute("drop table %s" % (mxntable))
-            commit('Drop mxntable %s successful' % (mxntable))
-        except Exception:
-            rollback('Drop mxntablel %s failed' % (mxntable))
+            commit('SUCCESS: DROP TABLE %s' % (mxntable))
+        except:
+            rollback('FAILED: DROP TABLE %s' % (mxntable))

@@ -65,3 +65,18 @@ def delete(table, column, content, column2, content2):
                 commit('Delete %s (%s) from table %s successful' % (content2, column2, table))
             except:
                 rollback('Delete %s (%s) from table %s not successful' % (content2, column2, table))
+
+
+# send custom query to database
+def sendQuery(query):
+
+    database = databaseInputFields[0].get()
+    user = databaseInputFields[1].get()
+
+    try:
+        begin('Send custom query to database')
+        call = functions.popen("echo '%s;' | psql %s %s" % (query, database, user))
+        result = call.stdout.read()
+        commit("SUCCESS: '%s';\n%s" % (query, result))
+    except:
+        rollback("FAILED: '%s';" % (query))

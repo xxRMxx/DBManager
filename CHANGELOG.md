@@ -1,12 +1,45 @@
+[1.2.0] - 2019-02-05
+
+Added
+  -functions.py
+  -Logo/applogo.svg
+  -Logo/applogo.png
+  -Analyzer/view.py
+  -Analyzer/commands.py
+
+Changed
+  -CHANGELOG.md
+  -Column/commands.py
+  -Column/view.py
+  -Content/commands.py
+  -Content/view.py
+  -DBManager.py
+  -Database/commands.py
+  -Diagram/commands.py
+  -MxNTable/commands.py
+  -Root/commands.py
+  -Root/view.py
+  -Table/commands.py
+  -Table/view.py
+  -styles.py
+
+Deprecated
+  -
+
+Removed
+  -
+
+Fixed
+  -
+
+
 [1.0.11] - 2019-01-25
 
 Added
   -styles.py
 
 Changed
-  -
-
-CHANGELOG.md
+  -CHANGELOG.md
   -Column/view.py
   -Content/commands.py
   -Content/view.py

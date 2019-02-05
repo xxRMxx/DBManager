@@ -66,3 +66,35 @@ button_deleteTable.place(
     width = styles.button['width'],
     height = styles.button['height']
 )
+
+
+# button to analyze specific table
+button_analyze = Button(
+    tab2,
+    text = 'Analyze table',
+    command = lambda: analyzeTable(
+        table = tableInputFields[0].get()
+    )
+)
+button_analyze.place(
+    x = 80,
+    y = 200,
+    width = styles.button['width'],
+    height = styles.button['height']
+)
+
+
+# button to vacuum specific table
+button_vacuum = Button(
+    tab2,
+    text = 'Vacuum table',
+    command = lambda: vacuumTable(
+        table = tableInputFields[0].get()
+    )
+)
+button_vacuum.place(
+    x = 280,
+    y = 200,
+    width = styles.button['width'],
+    height = styles.button['height']
+)

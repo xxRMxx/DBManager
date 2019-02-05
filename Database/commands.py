@@ -39,8 +39,9 @@ def openDB(database, user, password, host):
                 connection.set("established (%s@%s)" % (user, database))
                 writeTarget("Connection established to database %s with user %s" % (database, user))
     except:
-        # call the set_connstate function here
         connection.set("not established")
+        text_info.delete(1.0, END)
+        text_info.insert(1.0, 'FAILED: not connected to %s as %s' % (database, user))
         rollback("Connecting to database failed")
 
 
@@ -53,8 +54,11 @@ def set_connstate(*args):
         return None
 
     state = 'established'
+    database = databaseInputFields[0].get()
+    user = databaseInputFields[1].get()
+    text_info.delete(1.0, END)
+    text_info.insert(1.0, 'SUCCESS: connected to %s as %s' % (database, user))
     update_in_progress = True
-    #entryConnection.set(state)
     update_in_progress = False
 
 

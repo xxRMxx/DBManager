@@ -1,17 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# The DBManager is an API for database communication
-# supported databases: Postgres
-
-# TODO
-# responsiveness
-# database analyzer
-# more fresh design
-# show application logo when in window switcher
-# in foreign key view there is no hote.grid() at end --> valdiate if needed
-
-
 # import things for database communication and system processes
 from Tkinter import *
 from ttk import *
@@ -20,37 +9,45 @@ from subprocess import Popen, PIPE
 from shlex import split
 from datetime import datetime
 import tkMessageBox
-import psycopg2
-import subprocess
 import time
+import os
+import psycopg2
 
-# import the main styling for buttons, inputFields etc.
+# custom modules
+import functions
 import styles
 
-
-timestamp = str(datetime.now())
+# TODO
+# responsiveness
+# more fresh design
+# add focus (highlighting for current active field)
+# rewrite all functions to send a call and retrieve the result
+# describe the concrete exception
 
 # check whether logfile exists; else create it
 try:
-    subprocess.Popen("ls /var/log/dbmanager.log | grep dbmanager.log", shell = True)
+    functions.popen('ls /var/log/dbmanager.log | grep dbmanager.log')
 except:
-    subprocess.Popen("cd /var/log/ && touch dbmanager.log", shell = True)
+    functions.popen('cd /var/log/ && touch dbmanager.log')
+
 
 filename = '/var/log/dbmanager.log'
+timestamp = str(datetime.now())
 
 
 # build the gui
 root = Tk()
-root.title("DBManager")
+root.title('DBManager')
 root.minsize(
     width = styles.globalWidth,
     height = styles.globalHeight
 )
-# TODO: make this resizable?
 root.resizable(
     width = False,
     height = False
 )
+root.call('wm', 'iconphoto', root._w, PhotoImage(file = styles.app_logo))
+
 
 note = Notebook(root)
 
@@ -65,7 +62,9 @@ commands = [
     './Foreignkey/commands.py',
     './Sequence/commands.py',
     './Content/commands.py',
-    './Diagram/commands.py'
+    './Analyzer/commands.py',
+    './Diagram/commands.py',
+    './functions.py'
 ]
 
 
@@ -79,7 +78,9 @@ views = [
     './Foreignkey/view.py',
     './Sequence/view.py',
     './Content/view.py',
-    './Diagram/view.py'
+    './Analyzer/view.py',
+    './Diagram/view.py',
+    './styles.py'
 ]
 
 
@@ -91,6 +92,13 @@ for script in commands:
 # import views
 for view in views:
     execfile(view)
+
+
+# keyboard shortcut to show available databases, users, tables and columns by key press
+root.bind('<F1>', showDatabases)
+root.bind('<F2>', showUsers)
+root.bind('<F3>', showTables)
+root.bind('<F4>', showColumns)
 
 
 # run gui

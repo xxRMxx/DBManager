@@ -49,33 +49,40 @@ submenu.add_command(
 
 filemenu.add_separator()
 filemenu.add_command(
-    label = "Reset",
+    label = 'Reset',
     command = reset
 )
 
 
 filemenu.add_separator()
 filemenu.add_command(
-    label = "Help",
+    label = 'Help',
     command = help
 )
 
 
 filemenu.add_separator()
 filemenu.add_command(
-    label = "Exit",
+    label = 'Exit',
     command = closeDB
 )
 
 
 # info field
-textFieldInfo = Text(
+label_info = Label(root, text = 'Output')
+label_info.place(
+    x = 250,
+    y = 285,
+    width = styles.label['width'],
+    height = styles.label['height']
+)
+text_info = Text(
     root
 )
-textFieldInfo.insert(END, "")
-textFieldInfo.place(
-    x = 561,
-    y = 0,
-    width = 200,
-    height = 274
+text_info.insert(END, "NOTE: Connect to a database first.")
+text_info.place(
+    x = styles.text['x-axis'],
+    y = styles.text['y-axis'],
+    width = styles.text['width'],
+    height = styles.text['height']
 )
