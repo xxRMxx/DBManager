@@ -133,6 +133,39 @@ connection_button.place(
 )
 
 
+
+# for debugging only
+if debug:
+
+    database = ''
+    user = ''
+    password = ''
+    host = ''
+
+    # fill the input fields with debugging values
+    input_db.insert(0, database)
+    input_user.insert(0, user)
+    input_pw.insert(0, password)
+    input_host.insert(0, host)
+
+    connection_button = Button(
+        tab1,
+        text = "DEBUG: Connect",
+        command = lambda: openDB(
+            database = database,
+            user = user,
+            password = password,
+            host = host
+        )
+    )
+    connection_button.place(
+        x = 280,
+        y = 175,
+        width = styles.button['width'],
+        height = styles.button['height']
+    )
+
+
 note.grid(
     ipady = 125
 )

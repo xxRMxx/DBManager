@@ -8,23 +8,35 @@ def addForeignKey(table, column, reftable, fkoption):
         try:
             begin("Add foreign key with delete restriction")
             cur.execute("alter table %s add foreign key (%s) references %s on delete restrict" % (table, column, reftable))
-            commit("Add foreign key on table %s on column %s with delete restriction successful" % (table, column))
+            commit("SUCCESS: ALTER TABLE %s ADD FOREIGN KEY (%s) REFERENCES %s ON DELETE RESTRICT;" % (table, column, reftable))
+            msg = 'def addForeignKey(1): passed'
+            return msg
         except:
-            rollback("Add foreign key on table %s on column %s with delete restriction failed" % (table, column))
+            rollback("FAILED: ALTER TABLE %s ADD FOREIGN KEY (%s) REFERENCES %s ON DELETE RESTRICT;" % (table, column, reftable))
+            msg = 'def addForeignKey(1): failed'
+            return msg
     elif fkoption == 2:
         try:
             begin("Add foreign key with delete cascading")
             cur.execute("alter table %s add foreign key (%s) references %s on delete cascade" % (table, column, reftable))
-            commit("Add foreign key on table %s on column %s with delete cascading successful" % (table, column))
+            commit("SUCCESS: ALTER TABLE %s ADD FOREIGN KEY (%s) REFERENCES %s ON DELETE CASCADE;" % (table, column, reftable))
+            msg = 'def addForeignKey(2): passed'
+            return msg
         except:
-            rollback("Add foreign key on table %s on column %s with delete cascading failed" % (table, column))
+            rollback("FAILED: ALTER TABLE %s ADD FOREIGN KEY (%s) REFERENCES %s ON DELETE CASCADE;" % (table, column, reftable))
+            msg = 'def addForeignKey(2): failed'
+            return msg
     else:
         try:
             begin("Add foreign key with delete set null constraint")
             cur.execute("alter table %s add foreign key (%s) references %s on delete set null" % (table, column, reftable))
-            commit("Add foreign key on table %s on column %s with on delete set null successful" % (table, column))
+            commit("SUCCESS: ALTER TABLE %s ADD FOREIGN KEY (%s) REFERENCES %s ON DELETE SET NULL;" % (table, column, reftable))
+            msg = 'def addForeignKey(3): passed'
+            return msg
         except:
-            rollback("Add foreign key on table %s on column %s with on delete set null failed" % (table, column))
+            rollback("FAILED: ALTER TABLE %s ADD FOREIGN KEY (%s) REFERENCES %s ON DELETE SET NULL;" % (table, column, reftable))
+            msg = 'def addForeignKey(3): failed'
+            return msg
 
 
 # drop foreign key
@@ -36,8 +48,12 @@ def dropForeignKey(table, column, reftable):
 
     if val:
         try:
-            begin("Drop foreign key for table %s on column %s" % (table, columny))
+            begin("Drop foreign key for table %s on column %s" % (table, column))
             cur.execute("alter table %s drop constraint %s_%s_fkey" % (table, table, column))
-            commit("Drop foreign key for table %s on column %s successful" % (table, column))
+            commit("SUCCESS: ALTER TABLE %s DROP CONSTRAINT %s_%s_fkey;" % (table, table, column))
+            msg = 'def dropForeignKey(): passed'
+            return msg
         except:
-            rollback("Drop foreign key for table %s on column %s failed" % (table, column))
+            rollback("FAILED: ALTER TABLE %s DROP CONSTRAINT %s_%s_fkey;" % (table, table, column))
+            msg = 'def dropForeignKey(): failed'
+            return msg

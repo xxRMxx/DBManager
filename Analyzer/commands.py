@@ -14,8 +14,12 @@ def explainAnalyze(query):
 
     try:
         begin("Analyse query '%s'" % (query))
-        call = functions.popen("echo 'explain analyze %s;' | psql %s %s" % (query, database, user))
+        call = functions.popen("echo 'explain analyze %s;' | psql -d %s -U %s" % (query, database, user))
         result = call.stdout.read()
         commit("SUCCESS: EXPLAIN ANALYZE '%s';\n%s" % (query, result))
+        msg = 'def explainAnalyze(): passed'
+        return msg
     except:
         rollback("FAILED: EXPLAIN ANALYZE '%s';" % (query))
+        msg = 'def explainAnalyze(): failed'
+        return msg

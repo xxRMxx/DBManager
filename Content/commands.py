@@ -17,9 +17,13 @@ def insert(table, column, content):
         try:
             begin("Inserting content into table %s" % (table))
             cur.execute("insert into %s (%s_id, %s_modtime, %s_author, %s) values (default, now(), %s, %s)" % (table, table, table, table, column, user, content))
-            commit("Inserting data into table %s successful" % (table))
+            commit("SUCCESS: INSERT INTO %s (%s_id, %s_modtime, %s_author, %s) VALUES (default, now(), %s, %s);" % (table, table, table, table, column, user, content))
+            msg = 'def insert(): passed'
+            return msg
         except:
-            rollback('Inserting content not successful')
+            rollback("FAILED: INSERT INTO %s (%s_id, %s_modtime, %s_author, %s) VALUES (default, now(), %s, %s);" % (table, table, table, table, column, user, content))
+            msg = 'def insert(): failed'
+            return msg
 
 
 # function for updating existend data in table
@@ -33,9 +37,13 @@ def update(table, column, content, column2, content2):
     try:
         begin("Updating content in table %s" % (table))
         cur.execute("update %s set (%s_modtime, %s_author, %s) = (now(), %s, %s) where %s = %s" % (table, table, table, column, user, content, column2, content2))
-        commit("Updating content in table %s successful" % (table))
+        commit("SUCCESS: UPDATE %s SET (%s_modtime, %s_author, %s) = (now(), %s, %s) WHERE %s = %s;" % (table, table, table, column, user, content, column2, content2))
+        msg = 'def update(): passed'
+        return msg
     except:
-        rollback('Updating content in table %s not successful' % (table))
+        rollback("FAILED: UPDATE %s SET (%s_modtime, %s_author, %s) = (now(), %s, %s) WHERE %s = %s;" % (table, table, table, column, user, content, column2, content2))
+        msg = 'def update(): failed'
+        return msg
 
 
 # function for deleting an entry in table
@@ -55,16 +63,24 @@ def delete(table, column, content, column2, content2):
             try:
                 begin('Clean table %s' % (table))
                 cur.execute('delete from %s' % (table))
-                commit('Clean table %s successful' % (table))
+                commit('SUCCESS: DELETE FROM %s;' % (table))
+                msg = 'def delete(all): passed'
+                return msg
             except:
-                rollback('Clean table %s not successful' % (table))
+                rollback('FAILED: DELETE FROM %s;' % (table))
+                msg = 'def delete(all): failed'
+                return msg
         else:
             try:
                 begin('Delete %s from table %s' % (content, table))
-                cur.execute('delete from %s where %s = %s' % (table, column2, content2))
-                commit('Delete %s (%s) from table %s successful' % (content2, column2, table))
+                cur.execute("delete from %s where %s = '%s'" % (table, column2, content2))
+                commit('SUCCESS: DELETE FROM %s WHERE %s = "%s";' % (table, column2, content2))
+                msg = 'def delete(where): passed'
+                return msg
             except:
-                rollback('Delete %s (%s) from table %s not successful' % (content2, column2, table))
+                rollback('FAILED: DELETE FROM %s WHERE %s = "%s";' % (table, column2, content2))
+                msg = 'def delete(where): failed'
+                return msg
 
 
 # send custom query to database
@@ -78,5 +94,9 @@ def sendQuery(query):
         call = functions.popen("echo '%s;' | psql %s %s" % (query, database, user))
         result = call.stdout.read()
         commit("SUCCESS: '%s';\n%s" % (query, result))
+        msg = 'def sendQuery(): passed'
+        return msg
     except:
         rollback("FAILED: '%s';" % (query))
+        msg = 'def sendQuery(): failed'
+        return msg

@@ -46,7 +46,7 @@ button_addTable = Button(
 )
 button_addTable.place(
     x = 80,
-    y = 175,
+    y = 150,
     width = styles.button['width'],
     height = styles.button['height']
 )
@@ -62,7 +62,7 @@ button_deleteTable = Button(
 )
 button_deleteTable.place(
     x = 280,
-    y = 175,
+    y = 150,
     width = styles.button['width'],
     height = styles.button['height']
 )
@@ -78,7 +78,7 @@ button_analyze = Button(
 )
 button_analyze.place(
     x = 80,
-    y = 200,
+    y = 175,
     width = styles.button['width'],
     height = styles.button['height']
 )
@@ -94,6 +94,23 @@ button_vacuum = Button(
 )
 button_vacuum.place(
     x = 280,
+    y = 175,
+    width = styles.button['width'],
+    height = styles.button['height']
+)
+
+
+# button to create the diagram
+button_createDiagram = Button(
+    tab2,
+    text = 'Create diagram',
+    command = lambda: createDia(
+        user = databaseInputFields[1].get(), # input_user
+        table = tableInputFields[0].get() # input_table
+    )
+)
+button_createDiagram.place(
+    x = 80,
     y = 200,
     width = styles.button['width'],
     height = styles.button['height']

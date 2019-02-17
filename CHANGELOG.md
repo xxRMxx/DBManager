@@ -1,3 +1,38 @@
+[1.3.0] - 2019-02-17
+
+Added
+  -
+
+Changed
+  -Analyzer/commands.py
+  -Column/commands.py
+  -Column/view.py
+  -Content/commands.py
+  -DBManager.py
+  -Database/commands.py
+  -Database/view.py
+  -Foreignkey/commands.py
+  -MxNTable/commands.py
+  -MxNTable/view.py
+  -Root/commands.py
+  -Root/view.py
+  -Sequence/commands.py
+  -Table/commands.py
+  -Table/view.py
+  -functions.py
+
+Deprecated
+  -
+
+Removed
+  -main.py
+  -Diagram/commands.py
+  -Diagram/view.py
+
+Fixed
+  -
+
+
 [1.2.0] - 2019-02-05
 
 Added

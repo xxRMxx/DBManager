@@ -8,8 +8,12 @@ def addColumn(table, column, columntype):
         begin("Add column %s (%s) to table %s" % (column, columntype, table))
         cur.execute("alter table %s add column %s %s" % (table, column, columntype))
         commit("SUCCESS: ALTER TABLE %s ADD COLUMN %s %s;" % (table, column, columntype))
+        msg = 'def addColumn(): passed'
+        return msg
     except:
         rollback("FAILED: ALTER TABLE %s ADD COLUMN %s %s;" % (table, column, columntype))
+        msg = 'def addColumn(): failed'
+        return msg
 
 
 # drop column from table
@@ -22,8 +26,12 @@ def dropColumn(table, column):
             begin("Drop column %s from table %s" % (column, table))
             cur.execute("alter table %s drop column %s" % (table, column))
             commit("SUCCESS: ALTER TABLE %s DROP COLUMN %s;" % (table, column))
+            msg = 'def dropColumn(): passed'
+            return msg
         except:
             rollback("FAILED: ALTER TABLE %s DROP COLUMN %s;" % (table, column))
+            msg = 'def dropColumn(): failed'
+            return msg
 
 
 # add index to specific column
@@ -36,18 +44,26 @@ def addIndex(table, column, index):
 
     if is_unique:
         try:
-            begin('Create unique index on column %s' % (colunm))
-            cur.execute('create unique index %s on %s (%s)' % (index, table, column))
+            begin("Create unique index on column %s" % (column))
+            cur.execute("create unique index %s on %s (%s)" % (index, table, column))
             commit('SUCCESS: CREATE UNIQUE INDEX %s ON %s (%s);' % (index, table, column))
+            msg = 'def addIndex(is_unique): passed'
+            return msg
         except:
             rollback('FAILED: CREATE UNIQUE INDEX %s ON %s (%s);' % (index, table, column))
+            msg = 'def addIndex(is_unique): failed'
+            return msg
 
     try:
         begin('Create index on column %s' % (column))
         cur.execute('create index %s on %s (%s)' % (index, table, column))
         commit('SUCCESS: CREATE INDEX %s ON %s (%s);' % (index, table, column))
+        msg = 'def addIndex(): passed'
+        return msg
     except:
         rollback('FAILED: CREATE INDEX %s ON %s (%s);' % (index, table, column))
+        msg = 'def addIndex(): failed'
+        return msg
 
 
 # drop index
@@ -56,8 +72,12 @@ def dropIndex(index):
         begin('Drop index %s' % (index))
         cur.execute('drop index %s' % (index))
         commit('SUCCESS: DROP INDEX %s;' % (index))
+        msg = 'def dropIndex(): passed'
+        return msg
     except:
         rollback('FAILED: DROP INDEX %s;' % (index))
+        msg = 'def dropIndex(): failed'
+        return msg
 
 
 # analyse specific column
@@ -76,25 +96,9 @@ def analyzeColumn(table, column):
             raise AssertionError('FAILED: %s does not exist' % (column))
 
         commit('SUCCESS: ANALYZE %s;\n%s' % (column, result))
+        msg = 'def analyzeColumn(): passed'
+        return msg
     except:
         rollback('FAILED: ANALYZE column %s;' % (column))
-
-
-# vacuum specific column
-def vacuumColumn(column):
-
-    # get current user and database information
-    database = databaseInputFields[0].get()
-    user = databaseInputFields[1].get()
-
-    try:
-        begin('Vacuum full table %s' % (column))
-        call = functions.popen("echo 'vacuum full verbose analyze %s;' | psql -d %s -U %s" % (column, database, user))
-        result = call.stdout.read()
-
-        if not result:
-            raise AssertionError('FAILED: %s does not exist' % (column))
-
-        commit('SUCCESS: VACUUM FULL VERBOSE ANALYZE %s;\n%s' % (column, result))
-    except:
-        rollback('FAILED: VACUUM FULL VERBOSE ANALYZE %s;' % (column))
+        msg = 'def analyzeColumn(): failed'
+        return msg

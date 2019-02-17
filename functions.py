@@ -9,7 +9,7 @@ import imp
 
 # write a line into logfile (/var/log/dbmanager.log)
 def writeTarget(string):
-    target = open(filename, 'a')
+    target = open(logfile, 'a')
     target.write(timestamp + ": %s\n" % (string))
     target.close()
 

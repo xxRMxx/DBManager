@@ -8,7 +8,7 @@ conn = ""
 cur = ""
 
 # function to open a database connection
-def openDB(database, user, password, host):
+def openDB(database, user, password = '', host = ''):
     global conn
     global cur
     conn = ""
@@ -38,11 +38,15 @@ def openDB(database, user, password, host):
                 cur = conn.cursor()
                 connection.set("established (%s@%s)" % (user, database))
                 writeTarget("Connection established to database %s with user %s" % (database, user))
+        msg = 'def openDB(): passed'
+        return msg
     except:
         connection.set("not established")
         text_info.delete(1.0, END)
         text_info.insert(1.0, 'FAILED: not connected to %s as %s' % (database, user))
         rollback("Connecting to database failed")
+        msg = 'def openDB(): failed'
+        return msg
 
 
 # function for setting the connection state
@@ -67,6 +71,8 @@ def set_connstate(*args):
 def closeDB():
     if cur == "":
         root.quit()
+        msg = 'def closeDB(): passed'
+        return msg
     else:
         try:
             conn.rollback()
@@ -76,3 +82,5 @@ def closeDB():
         except:
             rollback("Connection closed")
             sys.exit(1)
+        msg = 'def closeDB(): failed'
+        return msg

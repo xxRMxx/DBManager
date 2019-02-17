@@ -117,7 +117,7 @@ button_addColumn = Button(
 )
 button_addColumn.place(
     x = 80,
-    y = 175,
+    y = 150,
     width = styles.button['width'],
     height = styles.button['height']
 )
@@ -134,7 +134,7 @@ button_deleteColumn = Button(
 )
 button_deleteColumn.place(
     x = 280,
-    y = 175,
+    y = 150,
     width = styles.button['width'],
     height = styles.button['height']
 )
@@ -152,7 +152,7 @@ button_addIndex = Button(
 )
 button_addIndex.place(
     x = 80,
-    y = 200,
+    y = 175,
     width = styles.button['width'],
     height = styles.button['height']
 )
@@ -168,7 +168,7 @@ button_dropIndex = Button(
 )
 button_dropIndex.place(
     x = 280,
-    y = 200,
+    y = 175,
     width = styles.button['width'],
     height = styles.button['height']
 )
@@ -185,7 +185,7 @@ button_analyze = Button(
 )
 button_analyze.place(
     x = 80,
-    y = 225,
+    y = 200,
     width = styles.button['width'],
     height = styles.button['height']
 )
@@ -201,7 +201,7 @@ button_vacuum = Button(
 )
 button_vacuum.place(
     x = 280,
-    y = 225,
+    y = 200,
     width = styles.button['width'],
     height = styles.button['height']
 )

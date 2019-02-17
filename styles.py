@@ -42,6 +42,6 @@ button = {
 text = {
     'x-axis': 0,
     'y-axis': 310,
-    'width': 629,
+    'width': 561,
     'height': 274,
 }
